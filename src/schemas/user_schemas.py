@@ -8,9 +8,11 @@ class UserCreate(BaseModel):
     class Config:
         orm_mode = True
 
-class UserResponse(BaseModel):
+class UserResponse(UserCreate):
     id: int
     is_blocked: bool
-
-    class Config:
-        orm_mode = True
+    pass
+    
+class ShortUserResponse(BaseModel):
+    id: int
+    is_blocked: bool
