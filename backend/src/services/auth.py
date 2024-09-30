@@ -6,10 +6,17 @@ from typing import Optional
 from entities.entity_models import User
 from entities.entity_models import get_db
 from sqlalchemy.orm import Session
+import time
+import os
+from dotenv import load_dotenv
 
-SECRET_KEY = "lSh8vG3FihcNs4ROYeIgynRTpsl0fkyF"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+# Load environment variables from .env file
+load_dotenv()
+
+# Now you can access the environment variables
+SECRET_KEY = os.getenv("SECRET_KEY", "fallback_secret")  # Fallback value in case it's not found
+ALGORITHM = os.getenv("ALGORITHM", "HS256")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
 
 
 # OAuth2 scheme for authentication
@@ -37,9 +44,12 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         room_id: str = payload.get("room")
         user_id: str = payload.get("user_id")
+        exp = payload.get("exp")
         if room_id is None or user_id is None:
             raise credentials_exception
-        
+        if exp is None or time.time() > exp:
+            raise credentials_exception  # Token has expired or exp is missing
+    
     except JWTError:
         raise credentials_exception
     
