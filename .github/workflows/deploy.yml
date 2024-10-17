@@ -53,6 +53,6 @@ jobs:
       # Step 6: Ensure the application is deployed correctly using rsync
       - name: Final Deployment with rsync
         run: |
-          rsync -avz --delete-after ./frontend/build/ root@94.228.163.62:/var/www/html/test-app/
+          rsync -avz --delete-after ./frontend/build/ root@94.250.255.111:/var/www/html/test-app/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
