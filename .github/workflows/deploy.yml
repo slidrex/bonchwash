@@ -1,0 +1,58 @@
+name: Deploy React App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Navigate to the frontend directory and install dependencies
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm install
+
+      # Step 4: Build the React app
+      - name: Build React app
+        run: |
+          cd frontend
+          npm run build
+
+      # Step 5: Deploy to the server
+      - name: Deploy to Server
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+
+          # Copy the built files to the remote server
+          scp -r ./frontend/build/* $SSH_USER@$SSH_HOST:/var/www/html/test-app/
+
+          # Restart Nginx (or other web server)
+          ssh $SSH_USER@$SSH_HOST "sudo systemctl restart nginx"
+
+      # Step 6: Ensure the application is deployed correctly using rsync
+      - name: Final Deployment with rsync
+        run: |
+          rsync -avz --delete-after ./frontend/build/ root@94.228.163.62:/var/www/html/test-app/
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
