@@ -4,7 +4,7 @@ from entities.entity_models import Book, User, get_db
 from schemas.book_schemas import BookCreate, BookResponse
 import datetime
 from pydantic import BaseModel
-from services.auth import get_current_user
+from services.auth import manager
 
 
 rt = APIRouter()
@@ -66,7 +66,7 @@ async def add_book(book: BookCreate, db: Session = Depends(get_db), current_user
 
 
 @rt.delete("/books/{bookId}", response_model=dict)
-async def remove_book(bookId: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+async def remove_book(bookId: int, db: Session = Depends(get_db), current_user: User = Depends(manager)):
     """
     Remove a booking for the authenticated user.
     """
@@ -82,18 +82,22 @@ async def remove_book(bookId: int, db: Session = Depends(get_db), current_user: 
     db.commit()
 
     return {"message": "Book removed successfully"}
+
 @rt.get("/books", response_model=list[BookResponse])
-async def get_books_by_day(day_offset: int = Query(0), db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+async def get_books_by_day(day_offset: int = Query(0), db: Session = Depends(get_db), user: User = Depends(manager)):
     """
     Get books for a given day for the authenticated user.
     The `day_offset` query parameter is the number of days from today (e.g., 0 for today, 1 for tomorrow).
     """
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
+
     # Calculate the start and end of the requested day
     start_of_day = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) + datetime.timedelta(days=day_offset)
     end_of_day = start_of_day + datetime.timedelta(days=1)
 
     books = db.query(Book).filter(
-        Book.user_id == current_user.id,
+        Book.user_id == user.id,
         Book.book_date >= start_of_day,
         Book.book_date < end_of_day
     ).all()

@@ -7,6 +7,7 @@ from entities.entity_models import get_db
 from services.auth import get_current_user
 from fastapi import Depends
 from typing import List
+
 rt = APIRouter()
 
 @rt.get("/profile", response_model=UserResponse)
