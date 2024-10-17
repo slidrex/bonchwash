@@ -1,0 +1,329 @@
+.book_announcement {
+    margin-top: 6rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5rem;
+    transition: justify-content 1s ease-in-out, gap 1s ease-in-out, margin-top 1s ease-in-out;
+}
+
+.book_announcement.centered {
+    justify-content: flex-start;
+    gap: 0;
+    margin-top: 0.5rem;
+}
+
+.book_announcement h1.hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, height 0.5s ease-in-out, margin 0.5s ease-in-out;
+}
+
+.book_announcement h1{
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-align: center;
+    user-select: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.name_inputbox{
+    margin-top: 5rem;
+    width: 50%;
+    border: 1px solid #797A7A;
+    border-radius: 20px;
+    backdrop-filter: blur(13px);
+    color: #000;
+    user-select: none;
+    transition: margin-top 0.5s ease-in-out, width 0.5s ease-in-out;
+}
+
+.name_inputbox.fit-content {
+    width: 40%;
+}
+
+.name_inputbox.fit-content input{
+    text-align: center;
+    width: 100%;
+    padding: 1rem 0.5rem;
+}
+
+.name_inputbox.no-margin {
+    margin-top: 0;
+}
+
+.name_inputbox input {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    width: 88%;
+    padding: 23px 40px 23px 46px;
+    border: none;
+    background: transparent;
+    user-select: none;
+}
+
+.name_inputbox input:focus {
+    outline: none;
+    border: none;
+}
+
+.date_choose {
+    animation: fadeIn 0.5s ease-in-out;
+    transition: margin-top 1s ease-in-out, width 0.5s ease-in-out;
+    display: flex;
+    width: 40%;
+}
+
+.date_button {
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    flex: 1;
+    background: #FFFFFF;
+    color: #1A2F2F;
+    user-select: none;
+    font-size: 2rem;
+    transition: background-color 0.3s, box-shadow 0.1s, flex 1s ease-in-out, opacity 0.1s ease-in-out, border 1s ease-in-out;
+    text-align: center;
+    padding: 2rem 0;
+    border: 1px solid transparent; /* Initially transparent */
+}
+
+
+
+.date_button div:first-child {
+    letter-spacing: .15rem;
+    font-weight: 500;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #000;
+}
+
+@font-face {
+    font-family: 'Bhavuka';
+    src: url('../../../public/fonts/Bhavuka-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.date_button div:last-child {
+    font-family: Bhavuka, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #717171;
+;
+}
+
+.date_button:first-child {
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+.date_button:last-child {
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.date_button:not(:last-child) {
+    border-right: none;
+}
+
+.date_button.transitioned {
+    margin-top: 2rem;
+    flex: 1 1 100%;
+    transition: flex 1s ease-in-out, border 1s ease-in-out;
+    border: 1px solid #000; /* Border appears smoothly */
+    border-radius: 40px;
+    padding: 1rem 0;
+    background: white;
+}
+
+.date_button.active {
+    background: #D5D2CB;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.date_button.hidden {
+    margin-top: 2rem;
+    opacity: 0;
+    flex: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out, flex 0.5s ease-in-out, border 0.5s ease-in-out;
+    height: 0;
+    overflow: hidden;
+    border: 1px solid transparent;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.book_button {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #1A2F2F;
+    background-color: white;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    user-select: none;
+    margin-top: 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+    @media (max-width: 844px) {
+    .book_announcement h1 {
+        font-size: 2rem;
+    }
+
+    .name_inputbox {
+        width: 80%;
+    }
+
+    .name_inputbox input {
+        font-size: 20px;
+        padding: 20px 40px 20px 46px;
+    }
+
+    .date_choose {
+        width: 70%;
+    }
+
+    .date_button {
+        font-size: 1.8rem;
+        padding: 1.3rem 0;
+    }
+
+    .date_button div:first-child {
+        font-size: 1.3rem;
+    }
+
+    .date_button div:last-child {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .book_announcement h1 {
+        font-size: 1.8rem;
+    }
+
+    .name_inputbox {
+        width: 90%;
+    }
+
+    .name_inputbox input {
+        font-size: 18px;
+        padding: 18px 40px 18px 46px;
+    }
+
+    .date_choose {
+        width: 80%;
+    }
+
+    .date_button {
+        font-size: 1.5rem;
+        padding: 1.1rem 0;
+    }
+
+    .date_button div:first-child {
+        font-size: 1.1rem;
+    }
+
+    .date_button div:last-child {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 385px) {
+    .book_announcement h1 {
+        font-size: 1.5rem;
+    }
+
+    .name_inputbox {
+        width: 95%;
+    }
+
+    .name_inputbox input {
+        font-size: 16px;
+        padding: 16px 40px 16px 46px;
+    }
+
+    .date_choose {
+        width: 90%;
+    }
+
+    .date_button {
+        font-size: 1.3rem;
+        padding: 1rem 0;
+    }
+
+    .date_button div:first-child {
+        font-size: 1rem;
+    }
+
+    .date_button div:last-child {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .book_announcement h1 {
+        font-size: 1.3rem;
+    }
+
+    .name_inputbox {
+        width: 100%;
+    }
+
+    .name_inputbox input {
+        font-size: 14px;
+        padding: 14px 40px 14px 46px;
+    }
+
+    .date_choose {
+        width: 100%;
+    }
+
+    .date_button {
+        font-size: 1.1rem;
+        padding: 0.8rem 0;
+    }
+
+    .date_button div:first-child {
+        font-size: 0.9rem;
+    }
+
+    .date_button div:last-child {
+        font-size: 0.9rem;
+    }
+}

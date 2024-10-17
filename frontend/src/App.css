@@ -1,17 +1,27 @@
+
+#root {
+  height: 100%;
+  width: 100%;
+
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
 body {
   background: linear-gradient(180deg, #F2F2EC 0%, #F5EFE7 16.62%, #FAEADF 43.86%, #FEE8DA 67.12%, #E7D8C7 100%) no-repeat;
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
 }
 
-h1 {
-  font-size: 48px;
-  font-weight: 300;
-  letter-spacing: 0.06em;
-  text-align: center;
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
