@@ -14,7 +14,6 @@ function Header({ showHeaderContainer }) {
                 ) : (
                     <div>
                         <div className="header_noauth">
-                            TEXT
                         </div>
                     </div>
                 )}
