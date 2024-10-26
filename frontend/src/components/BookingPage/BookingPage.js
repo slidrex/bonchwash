@@ -25,10 +25,10 @@ function getDates() {
 function BookingPage() {
     const [activeButton, setActiveButton] = useState(null);
     const [transitionedButton, setTransitionedButton] = useState(null);
+    const [isCentered, setIsCentered] = useState(false);
     const { today, tomorrow, dayAfterTomorrow } = getDates();
 
 
-    const hasRoomNumber = /\d+/.test(inputValue);
 
     useEffect(() => {
         if (!hasRoomNumber) {
