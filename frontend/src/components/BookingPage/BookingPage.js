@@ -55,16 +55,21 @@ function BookingPage({ onBookClick }) {
 
     return (
         <div className={`book_announcement ${isCentered ? "centered" : ""}`}>
-            <h1 className={isCentered ? "hidden" : ""}>Забронировать стиральную машинку</h1>
-            <div className={`name_inputbox ${isCentered ? "no-margin fit-content" : ""}`}>
-                <input
-                    type="text"
-                    placeholder="Имя Фамилия, к. 666"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    spellCheck={false}
-                    readOnly={transitionedButton !== null}
-                />
+            <div className="main-header">
+                <h1 className="book-header">Забронировать стиральную машинку</h1>
+                <h2>Пожалуйта, авторизируйтесь</h2>
+
+            </div>
+            <div className="data-center">
+                <div className="vk-auth-button">
+                    <div className="logo">
+                        <img src="./vk.png" alt="" />
+                    </div>
+                    <div className="inline-text">
+                        Войти по VK ID
+                    </div>
+
+                </div>
             </div>
             {hasRoomNumber && (
                 <div className="date_choose">
