@@ -1,4 +1,4 @@
-import "./bookingPage.css";
+import "./AuthPage.css";
 /*
 function getDates() {
     const today = new Date();
@@ -21,7 +21,7 @@ function getDates() {
     };
 }
 */
-function BookingPage() {
+function AuthPage() {
 
 
 
@@ -47,4 +47,4 @@ function BookingPage() {
     );
 }
 
-export default BookingPage;
+export default AuthPage;

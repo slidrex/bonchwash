@@ -1,0 +1,24 @@
+.wash-index{
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-items: center;
+
+}
+.column *{
+    width: 100%;
+    text-align: center;
+    padding: 10px 8px 10px 8px;
+}
+.wash-index {
+    color: white;
+    border-radius: 15px 15px 0 0;
+    background-color: #1A2F2F;
+}
+.timestamp{
+    cursor: pointer;
+    background-color: white;
+    height: 100%;
+}
