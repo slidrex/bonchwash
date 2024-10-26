@@ -23,19 +23,9 @@ function getDates() {
 }
 
 function BookingPage() {
-    const [activeButton, setActiveButton] = useState(null);
-    const [transitionedButton, setTransitionedButton] = useState(null);
     const [isCentered, setIsCentered] = useState(false);
-    const { today, tomorrow, dayAfterTomorrow } = getDates();
 
 
-
-    useEffect(() => {
-        if (!hasRoomNumber) {
-            setActiveButton(null);
-            setTransitionedButton(null);
-        }
-    }, [hasRoomNumber]);
 
     return (
         <div className={`book_announcement ${isCentered ? "centered" : ""}`}>
@@ -55,19 +45,6 @@ function BookingPage() {
 
                 </div>
             </div>
-            {hasRoomNumber && (
-                <div className="date_choose">
-                    {[today, tomorrow, dayAfterTomorrow].map((date, index) => (
-                        <div
-                            key={index}
-                            className={`date_button ${activeButton === index ? "active" : ""} ${transitionedButton === index ? "transitioned" : ""} ${transitionedButton !== null && transitionedButton !== index ? "hidden" : ""}`}
-                        >
-                            <div>{index === 0 ? "Сегодня" : index === 1 ? "Завтра" : "Послезавтра"}</div>
-                            <div>{date}</div>
-                        </div>
-                    ))}
-                </div>
-            )}
         </div>
     );
 }
