@@ -27,16 +27,25 @@ function AuthPage() {
 
 
     return (
-        <div className='book_announcement'>
-            <div className="main-header">
-                <h2>Бронируйте стиральные машины в вашем общежитии с удобством</h2>
-                <h2 className="book-header">Войдите через ВКонтакте, чтобы начать пользоваться сервисом стиральную машинку</h2>
+        <div className="data-center">
+            <div className="body-data">
+                <h2>Бронируйте<br/>
+                    стиральные машины<br/>
+                    в вашем общежитии<br/>
+                    с удобством</h2>
+                <img src={`${process.env.PUBLIC_URL}/eyes.png`} alt="Описание картинки"
+                     style={{width: '100px', height: 'auto'}}/>
 
-            </div>
-            <div className="data-center">
+                <h2 className="book-header">Войдите<br/> через ВКонтакте,<br/> чтобы начать пользоваться сервисом<br/>
+                    стиральную
+                    машинку</h2>
+
                 <VKIDButton/>
             </div>
+
+
         </div>
+
     );
 }
 
