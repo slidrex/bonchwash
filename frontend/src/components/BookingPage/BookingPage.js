@@ -25,23 +25,8 @@ function getDates() {
 function BookingPage() {
     const [activeButton, setActiveButton] = useState(null);
     const [transitionedButton, setTransitionedButton] = useState(null);
-    const [inputValue, setInputValue] = useState("");
-    const [isCentered, setIsCentered] = useState(false);
     const { today, tomorrow, dayAfterTomorrow } = getDates();
 
-    const handleButtonClick = (index) => {
-        setActiveButton(index);
-    };
-
-    const handleInputChange = (event) => {
-        const value = event.target.value;
-        setInputValue(value);
-    };
-
-    const handleBookClick = () => {
-        setTransitionedButton(activeButton);
-        setIsCentered(true);
-    };
 
     const hasRoomNumber = /\d+/.test(inputValue);
 
