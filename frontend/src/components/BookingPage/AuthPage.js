@@ -1,4 +1,5 @@
 import "./AuthPage.css";
+import VKIDButton from "../VKIDButton";
 /*
 function getDates() {
     const today = new Date();
@@ -33,15 +34,7 @@ function AuthPage() {
 
             </div>
             <div className="data-center">
-                <div className="vk-auth-button">
-                    <div className="logo">
-                        <img src="./vk.png" alt="" />
-                    </div>
-                    <div className="inline-text">
-                        Войти по VK ID
-                    </div>
-
-                </div>
+                <VKIDButton/>
             </div>
         </div>
     );

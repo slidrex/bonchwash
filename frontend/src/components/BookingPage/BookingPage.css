@@ -12,11 +12,14 @@
     width: 100%;
 }
 
-.header-content{
+.footer-content{
     display: flex;
 
     justify-content: center;
     width: 100%;
+}
+.invisible{
+    opacity: 0;
 }
 .book-header{
     display: flex;

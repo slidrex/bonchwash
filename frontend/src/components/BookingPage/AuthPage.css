@@ -23,7 +23,7 @@
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, height 0.5s ease-in-out, margin 0.5s ease-in-out;
 }
 .background-container {
-    background-image: url('/public/bg.png');
+    background-image: url('/public/bg_pattern.png');
     background-size: cover; /* Подстраивает фон под размер контейнера */
     background-position: center; /* Центрирует фон */
     background-repeat: no-repeat; /* Отключает повторение */

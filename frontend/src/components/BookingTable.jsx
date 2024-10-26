@@ -1,6 +1,8 @@
 import './BookingTable.css'
 function BookingTable({index}) {
-    const timeSlots = ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
+
+    //const timeSlots = ["9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"];
+    const timeSlots = ["15", "16", "17", "18", "19", "-1", "-1", "-1", "-1", "-1", "-1"];
     const color = ['#FFFFFA', '#FFF9ED', '#FEF5E4', '#FFF1DF', '#FDEBDB', '#FAE6D4', '#FAE2D4', '#EEE0D9', '#EADBDC', '#E5D6DA', '#DCD4DD', '#D5CBE1']
     return (
         <div className="column">
@@ -10,11 +12,14 @@ function BookingTable({index}) {
             {timeSlots.map((time, rowIndex) => (
                 <div
                     key={rowIndex}
-                    className="timestamp"
+                    className={`timestamp ${time === "-1" ? "invisible" : ""}`}
                     style={{backgroundColor: color[rowIndex % color.length]}}
                 >
-                    {time}
+                            {time}:00
+
+
                 </div>
+
             ))}
         </div>
     );

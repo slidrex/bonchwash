@@ -1,6 +1,7 @@
 import './App.css';
 import BookingPage from "./components/BookingPage/BookingPage";
 import './components/BookingPage/AuthPage.css'
+import AuthPage from "./components/BookingPage/AuthPage";
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
         <div className="App">
             <div className='background-container'
             >
-                <BookingPage/>
+                <AuthPage/>
             </div>
         </div>
     );
