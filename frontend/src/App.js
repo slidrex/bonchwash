@@ -1,6 +1,5 @@
 import './App.css';
 import BookingPage from "./components/BookingPage/BookingPage";
-import AuthPage from './components/BookingPage/AuthPage';
 
 function App() {
 
