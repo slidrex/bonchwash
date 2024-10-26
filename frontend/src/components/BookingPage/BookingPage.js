@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./bookingPage.css";
-
+/*
 function getDates() {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -21,7 +21,7 @@ function getDates() {
         dayAfterTomorrow: formatDate(dayAfterTomorrow)
     };
 }
-
+*/
 function BookingPage() {
     const [isCentered, setIsCentered] = useState(false);
 
