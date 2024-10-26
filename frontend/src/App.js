@@ -12,8 +12,11 @@ function App() {
 
     return (
         <div className="App">
-            <Header showHeaderContainer={showHeaderContainer} />
-            <BookingPage onBookClick={handleBookClick} />
+            <div className='background-container'
+            >
+                <BookingPage onBookClick={handleBookClick}/>
+
+            </div>
         </div>
     );
 }
