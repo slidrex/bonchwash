@@ -3,10 +3,9 @@ import BookingTable from "../BookingTable";
 import './BookingPage.css'
 
 function BookingPage() {
-    const [selectedSlot, setSelectedSlot] = useState({ carNumber: 2, time: "9:00" });
 
     const carNumbers = [1, 2, 3, 4, 5, 6, 7];
-
+    carNumbers[0] = 1;
     return (
         <div className='container'>
             <div className="header-content">
