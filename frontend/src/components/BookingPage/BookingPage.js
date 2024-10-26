@@ -76,17 +76,11 @@ function BookingPage() {
                         <div
                             key={index}
                             className={`date_button ${activeButton === index ? "active" : ""} ${transitionedButton === index ? "transitioned" : ""} ${transitionedButton !== null && transitionedButton !== index ? "hidden" : ""}`}
-                            onClick={() => handleButtonClick(index)}
                         >
                             <div>{index === 0 ? "Сегодня" : index === 1 ? "Завтра" : "Послезавтра"}</div>
                             <div>{date}</div>
                         </div>
                     ))}
-                </div>
-            )}
-            {hasRoomNumber && activeButton !== null && transitionedButton === null && (
-                <div className="book_button" onClick={handleBookClick}>
-                    Перейти к брони
                 </div>
             )}
         </div>
