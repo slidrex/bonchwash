@@ -8,7 +8,7 @@ function App() {
         <div className="App">
             <div className='background-container'
             >
-                <BookingPage onBookClick={handleBookClick}/>
+                <BookingPage/>
 
             </div>
         </div>

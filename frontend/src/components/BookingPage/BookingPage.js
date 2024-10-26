@@ -22,7 +22,7 @@ function getDates() {
     };
 }
 
-function BookingPage({ onBookClick }) {
+function BookingPage() {
     const [activeButton, setActiveButton] = useState(null);
     const [transitionedButton, setTransitionedButton] = useState(null);
     const [inputValue, setInputValue] = useState("");
@@ -41,7 +41,6 @@ function BookingPage({ onBookClick }) {
     const handleBookClick = () => {
         setTransitionedButton(activeButton);
         setIsCentered(true);
-        onBookClick();
     };
 
     const hasRoomNumber = /\d+/.test(inputValue);
