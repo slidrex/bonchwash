@@ -17,7 +17,7 @@ function VKIDButton() {
 
                     VKID.Config.init({
                         app: 52503899,
-                        redirectUrl: 'https://bonchwash.ru',
+                        redirectUrl: 'https://localhost',
                         responseMode: VKID.ConfigResponseMode.Callback,
                         source: VKID.ConfigSource.LOWCODE,
                     });

@@ -29,8 +29,8 @@ function AuthPage() {
     return (
         <div className='book_announcement'>
             <div className="main-header">
-                <h1 className="book-header">Забронировать стиральную машинку</h1>
-                <h2>Пожалуйта, авторизируйтесь</h2>
+                <h2>Бронируйте стиральные машины в вашем общежитии с удобством</h2>
+                <h2 className="book-header">Войдите через ВКонтакте, чтобы начать пользоваться сервисом стиральную машинку</h2>
 
             </div>
             <div className="data-center">
