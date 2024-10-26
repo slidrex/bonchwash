@@ -26,7 +26,7 @@ function BookingPage() {
 
 
     return (
-        <div className={"book_announcement centered"}>
+        <div className="book_announcement centered">
             <div className="main-header">
                 <h1 className="book-header">Забронировать стиральную машинку</h1>
                 <h2>Пожалуйта, авторизируйтесь</h2>
