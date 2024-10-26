@@ -3,15 +3,16 @@
 .column{
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    width: 100%;
     align-items: center;
 
 }
 .column *{
     width: 100%;
     text-align: center;
-    padding: 10px 8px 10px 8px;
+    padding-inline: 10px;
 }
+
 .wash-index {
     color: white;
     border-radius: 15px 15px 0 0;
@@ -21,4 +22,20 @@
     cursor: pointer;
     background-color: white;
     height: 100%;
+    align-content: center;
+
+}
+@media(max-width: 600px) {
+    .column *{
+        font-size: 3vw;
+    }
+}
+
+@media(max-width: 450px)
+{
+    .column *{
+        width: 100%;
+        text-align: center;
+        padding-inline: 0px;
+    }
 }

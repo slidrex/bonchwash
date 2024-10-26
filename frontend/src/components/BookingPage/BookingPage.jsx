@@ -9,13 +9,18 @@ function BookingPage() {
 
     return (
         <div className='container'>
+            <div className="header-content">
+                <div className="book-header">
+                    <div className="today">Сегодня</div>
+                    <div className="tomorrow">Завтра</div>
+                    <div className="after-tomorrow">Послезавтра</div>
+                </div>
+            </div>
             <div className="body-content">
-                <div className="schedule-content">
                     {carNumbers.map((value, rowIndex) => (
                         <BookingTable index={value}/>
 
                     ))}
-                </div>
             </div>
             <div className="footer-content">
 
