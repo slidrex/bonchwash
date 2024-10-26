@@ -1,22 +1,26 @@
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from entities.entity_models import SessionLocal, User, Book
+from repositories.user_repository import UserRepository
 from schemas.user_schemas import UserCreate, UserResponse,ShortUserResponse
 from schemas.book_schemas import BookCreate
 from sqlalchemy.orm import Session
 from typing import List
 rt = APIRouter()
 
+def get_session():
+    session = SessionLocal()
+    try:
+        yield session
+    finally:
+        session.close()
+
+
 #@rt.delete("/user/{userId}")
-def remove_user(userId: int):
-    session: Session = SessionLocal()
-    user = session.query(User).filter(User.id == userId).first()
+def remove_user(userId: int, session: Session = Depends(get_session)):
+    user = UserRepository.get_user_by_id(session, userId)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    
-    session.delete(user)
-    session.commit()
-    return {"message": "User deleted"}
 
 #@rt.get("/user/{userId}")
 def get_user(userId:int):
