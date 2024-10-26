@@ -1,0 +1,47 @@
+.wash-index{
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+
+}
+.column *{
+    width: 100%;
+    text-align: center;
+    padding-inline: 10px;
+}
+
+.wash-index {
+    color: white;
+    border-radius: 15px 15px 0 0;
+    background-color: #1A2F2F;
+}
+.timestamp{
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+
+}
+.main-time{
+}
+.sec-time{
+}
+@media(max-width: 600px) {
+    .column *{
+        font-size: 3vw;
+    }
+}
+
+@media(max-width: 450px)
+{
+    .column *{
+        width: 100%;
+        text-align: center;
+        padding-inline: 0px;
+    }
+}

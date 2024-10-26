@@ -22,28 +22,52 @@
     margin: 0;
     transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out, height 0.5s ease-in-out, margin 0.5s ease-in-out;
 }
+.background-container {
+    background-image: url('/public/bg_pattern.png');
+    background-size: cover; /* Подстраивает фон под размер контейнера */
+    background-position: center; /* Центрирует фон */
+    background-repeat: no-repeat; /* Отключает повторение */
+    width: 100vw; /* 100% ширины экрана */
+    height: 100vh; /* 100% высоты экрана */
+}
 
-.book_announcement h1{
-    margin: 0;
-    font-size: 3rem;
-    font-weight: 300;
+
+.data-center{
+
+}
+
+.vk-auth-button{
+    display: flex;
+    padding: 30px;
+    justify-content: center;
+    gap: 2rem;
+    border-radius: 15px;
+    width: 40%;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+
+    font-family: Roboto, Serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 23.44px;
     letter-spacing: 0.06em;
     text-align: center;
-    user-select: none;
-    transition: opacity 0.5s ease-in-out;
-}
 
-.name_inputbox{
-    margin-top: 5rem;
-    width: 50%;
-    border: 1px solid #797A7A;
-    border-radius: 20px;
-    backdrop-filter: blur(13px);
-    color: #000;
-    user-select: none;
-    transition: margin-top 0.5s ease-in-out, width 0.5s ease-in-out;
 }
-
+.body-data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.data-center{
+    width: 100%;
+    height: 100%;
+}
 .name_inputbox.fit-content {
     width: 40%;
 }
@@ -75,27 +99,6 @@
     border: none;
 }
 
-.date_choose {
-    animation: fadeIn 0.5s ease-in-out;
-    transition: margin-top 1s ease-in-out, width 0.5s ease-in-out;
-    display: flex;
-    width: 40%;
-}
-
-.date_button {
-    font-family: Montserrat, sans-serif;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    flex: 1;
-    background: #FFFFFF;
-    color: #1A2F2F;
-    user-select: none;
-    font-size: 2rem;
-    transition: background-color 0.3s, box-shadow 0.1s, flex 1s ease-in-out, opacity 0.1s ease-in-out, border 1s ease-in-out;
-    text-align: center;
-    padding: 2rem 0;
-    border: 1px solid transparent; /* Initially transparent */
-}
 
 
 
@@ -190,7 +193,10 @@
     margin-top: 2rem;
 }
 
-
+h1{
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+}
 
 
 

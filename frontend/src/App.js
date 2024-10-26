@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
 import './App.css';
-import BookingPage from './components/BookingPage/BookingPage';
-import Header from "./components/Header/Header";
+import './components/BookingPage/AuthPage.css'
+import AuthPage from "./components/BookingPage/AuthPage";
+
 
 function App() {
-    const [showHeaderContainer, setShowHeaderContainer] = useState(true);
-
-    const handleBookClick = () => {
-        setShowHeaderContainer(false);
-    };
 
     return (
         <div className="App">
-            <Header showHeaderContainer={showHeaderContainer} />
-            <BookingPage onBookClick={handleBookClick} />
+            <div className='background-container'
+            >
+                <AuthPage/>
+            </div>
         </div>
     );
 }
