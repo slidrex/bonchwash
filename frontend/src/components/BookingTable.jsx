@@ -1,4 +1,3 @@
-import React, {useState} from 'react';
 import './BookingTable.css'
 function BookingTable({index}) {
     const carNumbers = [1, 2, 3, 4, 5, 6, 7];
