@@ -1,4 +1,9 @@
-
+:root{
+  --primary-button-color: #7FC02F;
+  --secondary-button-color: rgb(103, 162, 30, 0.15);
+  --invalid-input-stroke-color: #FF5555;
+  --invalid-input-bg-color: rgba(208, 44, 44, 0.15);
+}
 #root {
   height: 100%;
   width: 100%;
@@ -12,7 +17,7 @@ html, body {
 }
 
 body {
-  background: linear-gradient(180deg, #F2F2EC 0%, #F5EFE7 16.62%, #FAEADF 43.86%, #FEE8DA 67.12%, #E7D8C7 100%) no-repeat;
+  background-color: #F2F3F5;
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
 }
@@ -24,4 +29,36 @@ body {
   align-items: center;
   height: 100%;
   width: 100%;
+}
+.btn {
+  background-color: #8A8A8E;
+  color: white;
+  font-size: 17px;
+  line-height: 22px;
+  padding: 14px 24px;
+  border-radius: var(--input-border-radius);
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  font-family: 'Roboto Medium', sans-serif;
+}
+.primary{
+  background-color: var(--primary-button-color);
+}
+.secondary{
+  color: #67A21E;
+  background-color: var(--secondary-button-color);
+}
+.test-container{
+  position: absolute;
+  display: flex;
+
+}
+.test1001{
+  padding: 5px;
+
+}
+.invalid-input{
+  border-color: var(--invalid-input-stroke-color);
+  background-color: var(--invalid-input-bg-color);
 }

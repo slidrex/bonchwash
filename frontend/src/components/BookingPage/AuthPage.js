@@ -36,9 +36,7 @@ function AuthPage() {
                 <img src={`${process.env.PUBLIC_URL}/eyes.png`} alt="Описание картинки"
                      style={{width: '100px', height: 'auto'}}/>
 
-                <h2 className="book-header">Войдите<br/> через ВКонтакте,<br/> чтобы начать пользоваться сервисом<br/>
-                    стиральную
-                    машинку</h2>
+                <h2 className="book-header">Войдите<br/> через ВКонтакте,<br/> чтобы начать <br/>пользоваться сервисом<br/></h2>
 
                 <VKIDButton/>
             </div>

@@ -8,19 +8,29 @@ function BookingPage() {
     return (
 
         <div className='container'>
-            
+            <div className="header">
+                <div className="book-buttons">
+                    <div className="time-holder btn primary">
+                        <div className="today">Сегодня</div>
+                        <div className="inline-book">27 ноября</div>
+                    </div>
+                    <div className="time-holder btn secondary">
+                        <div className="tomorrow">Завтра</div>
+                        <div className="inline-book">28 ноября</div>
+
+                    </div>
+                    <div className="time-holder btn secondary">
+                        <div className="after-tomorrow">Послезавтра</div>
+                        <div className="inline-book">29 ноября</div>
+
+                    </div>
+                </div>
+            </div>
             <div className="body-content">
                     {carNumbers.map((value, rowIndex) => (
                         <BookingTable index={value}/>
 
                     ))}
-            </div>
-            <div className="footer-content">
-                <div className="book-header">
-                    <div className="today">Сегодня</div>
-                    <div className="tomorrow">Завтра</div>
-                    <div className="after-tomorrow">Послезавтра</div>
-                </div>
             </div>
         </div>
     );
