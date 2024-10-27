@@ -2,8 +2,6 @@ import "./AuthPage.css";
 import VKIDButton from "../VKIDButton";
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AuthPage.css';
-import VKIDButton from "../VKIDButton";
 
 /*
 function getDates() {
