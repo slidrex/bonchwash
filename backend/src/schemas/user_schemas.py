@@ -6,7 +6,7 @@ class UserCreate(BaseModel):
     room_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserResponse(UserCreate):
     id: int

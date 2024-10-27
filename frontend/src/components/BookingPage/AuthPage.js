@@ -1,5 +1,10 @@
 import "./AuthPage.css";
 import VKIDButton from "../VKIDButton";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './AuthPage.css';
+import VKIDButton from "../VKIDButton";
+
 /*
 function getDates() {
     const today = new Date();
@@ -23,8 +28,28 @@ function getDates() {
 }
 */
 function AuthPage() {
+    const navigate = useNavigate(); // Получаем функцию navigate
 
-
+    useEffect(() => {
+        // Проверка авторизации пользователя при загрузке страницы
+        fetch('http://localhost:8000/auth', {
+            method: 'GET',
+            credentials: 'include'  // Включаем куки в запросе
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Неавторизован');
+            return response.json();
+        })
+        .then(data => {
+            if (data.authorized) {
+                // Перенаправляем на страницу с таблицей, если авторизация успешна
+                navigate('/booking'); // Замените на ваш путь к BookingPage
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка проверки авторизации:', error);
+        });
+    }, [navigate]); // Добавляем navigate в зависимости
 
     return (
         <div className="data-center">
@@ -40,8 +65,6 @@ function AuthPage() {
 
                 <VKIDButton/>
             </div>
-
-
         </div>
 
     );
