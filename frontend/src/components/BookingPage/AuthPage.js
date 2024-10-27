@@ -30,7 +30,7 @@ function AuthPage() {
 
     useEffect(() => {
         // Проверка авторизации пользователя при загрузке страницы
-        fetch('http://bonchwash.ru/v1/auth', {
+        fetch('http://bonchwash.ru/api/v1/auth', {
             method: 'GET',
             credentials: 'include'  // Включаем куки в запросе
         })
