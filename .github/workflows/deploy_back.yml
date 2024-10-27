@@ -1,0 +1,61 @@
+name: Deploy FastAPI App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          cd backend
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      # Step 4: Run tests (опционально)
+      - name: Run tests
+        run: |
+          cd backend
+          source venv/bin/activate
+          pytest
+
+      # Step 5: Deploy to the server
+      - name: Deploy to Server
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+
+          # Copy the application files to the server
+          scp -r ./ $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back
+
+          # Restart Gunicorn service (или другой WSGI сервер)
+          ssh $SSH_USER@$SSH_HOST "sudo systemctl restart bonchwash-api-service"
+
+      # Step 6: Final sync with rsync
+      - name: Final Deployment with rsync
+        run: |
+          rsync -avz --delete-after ./* $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
