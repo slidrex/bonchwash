@@ -17,7 +17,7 @@ function VKIDButton() {
 
                     VKID.Config.init({
                         app: 52503899,
-                        redirectUrl: 'https://localhost',
+                        redirectUrl: 'https://bonchwash.ru',
                         responseMode: VKID.ConfigResponseMode.Callback,
                         source: VKID.ConfigSource.LOWCODE,
                     });
@@ -55,7 +55,7 @@ function VKIDButton() {
 
     function vkidOnSuccess(data) {
         console.log('Авторизация успешна:', data);
-        fetch('http://localhost:8000/api/v1/auth', {
+        fetch('http://bonchwash.ru/api/v1/auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
