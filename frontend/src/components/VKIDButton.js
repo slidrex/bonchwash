@@ -55,7 +55,7 @@ function VKIDButton() {
 
     function vkidOnSuccess(data) {
         console.log('Авторизация успешна:', data);
-        fetch('http://bonchwash.ru/api/v1/auth', {
+        fetch('http://bonchwash.ru/v1/auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
