@@ -47,7 +47,6 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           
-          # Copy the application files to the server
 
           scp -r ./backend/ $SSH_USER@$SSH_HOST:/root/backend/
           ssh $SSH_USER@$SSH_HOST "sudo python3 -m venv /root/backend/venv"
