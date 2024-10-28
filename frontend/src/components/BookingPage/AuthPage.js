@@ -31,7 +31,7 @@ function AuthPage() {
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
 
-    headers.append('Access-Control-Allow-Origin', 'https://id.vk.com');
+    headers.append('Access-Control-Allow-Origin', 'https://bonchwash.ru/api/v1/auth');
     headers.append('Access-Control-Allow-Credentials', 'true');
 
     headers.append('GET', 'POST');
