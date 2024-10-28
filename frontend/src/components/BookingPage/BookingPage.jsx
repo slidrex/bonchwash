@@ -3,7 +3,21 @@ import './BookingPage.css'
 
 function BookingPage() {
 
+    let response = fetch('https://bonchwash.ru/api/v1/auth', {
+        method: 'GET',
+        credentials: 'include'  // Включаем куки в запросе
+    });
+
+    if (response.ok) { 
+        let data = response.json();
+        if (!data.authorized) {
+            alert("BookingPage - Unauthorized. Redirect to login.");
+            return redirect('/'); 
+        }
+    }
+
     const carNumbers = [1, 2, 3, 4, 5, 6, 7];
+    
 
     return (
 

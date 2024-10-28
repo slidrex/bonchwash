@@ -44,8 +44,9 @@ function AuthPage() {
 
     if (response.ok) { 
         let data = response.json();
-        alert(data);
         if (data.authorized) {
+            alert("AuthPage - authorized. Redirect to booking.");
+            console.log("AUTH:", data);
             return redirect('/booking'); 
         } else {
             console.error(data);
