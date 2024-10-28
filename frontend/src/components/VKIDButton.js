@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { redirect } from "react-router-dom";
 
 function VKIDButton() {
     const vkidContainerRef = useRef(null);
@@ -55,24 +56,27 @@ function VKIDButton() {
 
     function vkidOnSuccess(data) {
         console.log('Авторизация успешна:', data);
-        // fetch('https://bonchwash.ru/api/v1/auth', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         access_token: data.access_token,
-        //         refresh_token: data.refresh_token,
-        //         vk_user_id: data.user_id,
-        //     }),
-        //     credentials: 'include'  // cookie enable
-        // })
-        // .then(response => {
-        //     if (!response.ok) throw new Error('Ошибка при авторизации на сервере');
-        //     return response.json();
-        // })
-        // .then(response => console.log('Ответ сервера:', response))
-        // .catch(error => console.error('Ошибка отправки данных на сервер:', error));
+        fetch('https://bonchwash.ru/api/v1/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include', 
+            body: JSON.stringify({
+                access_token: data.access_token,
+                refresh_token: data.refresh_token,
+                vk_user_id: data.user_id,
+            }) 
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Authentication failed');
+            return response.json();
+        })
+        .then(data => {
+            console.log('Authentication successful:', data);
+            return redirect("/booking");
+        })
+        .catch(error => console.error('Error:', error));
     }
 
     function vkidOnError(error) {
