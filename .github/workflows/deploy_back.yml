@@ -62,6 +62,6 @@ jobs:
       # Step 6: Final sync with rsync
       - name: Final Deployment with rsync
         run: |
-          rsync -avz --delete-after ./backend/ root@94.250.255.111:/root/backend/
+          # rsync -avz --delete-after ./backend/ root@94.250.255.111:/root/backend/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
