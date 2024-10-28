@@ -6,7 +6,7 @@ from api.auth import rt as auth_rt
 from entities.entity_models import create_tables
 
 app = FastAPI()
-app.include_router(auth_rt, prefix='/v1')
+app.include_router(auth_rt, prefix='/api/v1')
 # app.include_router(book_rt, prefix='/v1')
 # app.include_router(personal_rt, prefix='/v1')
 # app.include_router(admin_rt)
