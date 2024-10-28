@@ -76,8 +76,8 @@ async def validate_token(request: VKAuthRequest, response: Response):
     is_valid = await validate_vk_token(request.access_token, request.user_id)
 
     if is_valid:
-        access_token = create_jwt_token(request.user_id, timedelta(days=7))
-        refresh_token = create_jwt_token(request.user_id, timedelta(days=7))
+        access_token = create_jwt_token(request.vk_user_id, timedelta(days=7))
+        refresh_token = create_jwt_token(request.vk_user_id, timedelta(days=7))
 
         response.set_cookie(
             key="access_token", 
