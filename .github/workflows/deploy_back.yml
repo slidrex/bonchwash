@@ -49,11 +49,11 @@ jobs:
           
           # Copy the application files to the server
 
-          rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/etc/backend/
+          rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/root/backend/
 
-          rm -rf /etc/backend/venv
-          python3 -m venv /etc/backend/venv
-          /etc/backend/venv/bin/pip install -r /etc/backend/requirements.txt
+          rm -rf /root/backend/venv
+          python3 -m venv /root/backend/venv
+          /root/backend/venv/bin/pip install -r /root/backend/requirements.txt
           sudo systemctl restart bonchwash-api.service
 
 
@@ -63,6 +63,6 @@ jobs:
       # Step 6: Final sync with rsync
       - name: Final Deployment with rsync
         run: |
-          rsync -avz --delete-after ./backend/ root@94.250.255.111:/etc/backend/
+          rsync -avz --delete-after ./backend/ root@94.250.255.111:/root/backend/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
