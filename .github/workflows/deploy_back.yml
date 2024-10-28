@@ -21,12 +21,12 @@ jobs:
           python-version: '3.9'
 
       # Step 3: Install dependencies
-      - name: Install dependencies
-        run: |
-          cd backend
-          python -m venv venv
-          source venv/bin/activate
-          pip install -r requirements.txt
+      #- name: Install dependencies
+      #  run: |
+      #    cd backend
+      #    python -m venv venv
+      #    source venv/bin/activate
+      #    pip install -r requirements.txt
 
       # Step 4: Run tests (опционально)
       #- name: Run tests
@@ -46,11 +46,18 @@ jobs:
           echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
-
+          
           # Copy the application files to the server
 
           rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back/
 
+          rm -rf /var/www/html/bonchwash-back/venv
+
+          python3 -m venv /var/www/html/bonchwash-back/venv
+
+          source /var/www/html/bonchwash-back/venv/bin/activate
+
+          pip install -r /var/www/html/bonchwash-back/requirements.txt
 
 
           # Restart Gunicorn service (или другой WSGI сервер)
