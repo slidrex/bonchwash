@@ -28,26 +28,24 @@ function getDates() {
 function AuthPage() {
     const navigate = useNavigate(); // Получаем функцию navigate
 
-    useEffect(() => {
-        // Проверка авторизации пользователя при загрузке страницы
-        fetch('https://bonchwash.ru/api/v1/auth', {
-            method: 'GET',
-            credentials: 'include'  // Включаем куки в запросе
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Неавторизован');
-            return response.json();
-        })
-        .then(data => {
-            if (data.authorized) {
-                // Перенаправляем на страницу с таблицей, если авторизация успешна
-                navigate('/booking'); // Замените на ваш путь к BookingPage
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка проверки авторизации:', error);
-        });
-    }, [navigate]); // Добавляем navigate в зависимости
+    fetch('https://bonchwash.ru/api/v1/auth', {
+        method: 'GET',
+        credentials: 'include'  // Включаем куки в запросе
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Неавторизован');
+        return response.json();
+    })
+    .then(data => {
+        if (data.authorized) {
+            // Перенаправляем на страницу с таблицей, если авторизация успешна
+            navigate('/booking'); 
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка проверки авторизации:', error);
+    });
+
 
     return (
         <div className="data-center">

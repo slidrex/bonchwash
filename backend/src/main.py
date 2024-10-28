@@ -16,6 +16,3 @@ app.include_router(auth_rt, prefix='/v1')
 def recreate_db():
     create_tables()  # Optionally recreate the database
     return {"message": "database_recreated"}
-@app.get("/tests")
-def testapsfsf():
-    return {"hell" :  "mell"}
