@@ -97,7 +97,7 @@ async def vk_auth(data: VKAuthRequest, response: Response):
         samesite="Strict", 
         max_age=SEVEN_DAYS)
     
-    return {"message": "Авторизация успешна"}
+    return response
 
 # Эндпоинт для проверки авторизации
 @rt.get("/auth")
