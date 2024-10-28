@@ -49,15 +49,12 @@ jobs:
           
           # Copy the application files to the server
 
-          rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back/
+          rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/etc/backend/
 
-          rm -rf /var/www/html/bonchwash-back/venv
-
-          python3 -m venv /var/www/html/bonchwash-back/venv
-
-          source /var/www/html/bonchwash-back/venv/bin/activate
-
-          pip install -r /var/www/html/bonchwash-back/requirements.txt
+          rm -rf /etc/backend/venv
+          python3 -m venv /etc/backend/venv
+          /etc/backend/venv/bin/pip install -r /etc/backend/requirements.txt
+          sudo systemctl restart bonchwash-api.service
 
 
           # Restart Gunicorn service (или другой WSGI сервер)
@@ -66,6 +63,6 @@ jobs:
       # Step 6: Final sync with rsync
       - name: Final Deployment with rsync
         run: |
-          rsync -avz --delete-after ./backend/ root@94.250.255.111:/var/www/html/bonchwash-back/
+          rsync -avz --delete-after ./backend/ root@94.250.255.111:/etc/backend/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
