@@ -49,7 +49,7 @@ jobs:
 
           # Copy the application files to the server
 
-          scp -r ./backend/* $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back/
+          rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back/
 
 
 
