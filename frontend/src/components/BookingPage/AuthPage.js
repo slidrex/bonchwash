@@ -26,20 +26,19 @@ function getDates() {
 }
 */
 function AuthPage() {
-    let headers = new Headers();
+    // let headers = new Headers();
 
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
+    // headers.append('Content-Type', 'application/json');
+    // headers.append('Accept', 'application/json');
 
-    headers.append('Access-Control-Allow-Origin', '*');
-    headers.append('Access-Control-Allow-Credentials', 'true');
+    // headers.append('Access-Control-Allow-Origin', '*');
+    // headers.append('Access-Control-Allow-Credentials', 'true');
 
-    headers.append('GET', 'POST');
+    // headers.append('GET', 'POST');
 
     let response = fetch('https://bonchwash.ru/api/v1/auth', {
         method: 'GET',
-        credentials: 'include',  // Включаем куки в запросе
-        headers: headers
+        credentials: 'include'  // Включаем куки в запросе
     });
 
     if (response.ok) { 
