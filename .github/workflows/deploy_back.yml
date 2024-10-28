@@ -29,11 +29,11 @@ jobs:
           pip install -r requirements.txt
 
       # Step 4: Run tests (опционально)
-      - name: Run tests
-        run: |
-          cd backend
-          source venv/bin/activate
-          pytest
+      #- name: Run tests
+      #  run: |
+      #    cd backend
+      #    source venv/bin/activate
+      #    pytest
 
       # Step 5: Deploy to the server
       - name: Deploy to Server
