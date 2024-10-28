@@ -48,7 +48,7 @@ jobs:
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           
 
-          scp -r ./backend/ $SSH_USER@$SSH_HOST:/root/backend/
+          scp -r ./backend/ $SSH_USER@$SSH_HOST:/root/
           ssh $SSH_USER@$SSH_HOST "sudo python3 -m venv /root/backend/venv"
           ssh $SSH_USER@$SSH_HOST << 'EOF'
             
