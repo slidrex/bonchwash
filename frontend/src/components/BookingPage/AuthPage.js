@@ -1,7 +1,7 @@
 import "./AuthPage.css";
 import VKIDButton from "../VKIDButton";
 import React from 'react';
-import { redirect } from "react-router-dom";
+// import { redirect } from "react-router-dom";
 
 /*
 function getDates() {
