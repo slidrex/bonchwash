@@ -21,43 +21,11 @@ rt = APIRouter()
 
 SECRET_KEY = "HALOBALOFAVOL@&!@$!^GDASDCVBNLMJRP_!"
 
-# JWT
-# def create_jwt_token(vk_user_id: str, expires_delta: timedelta):
-#     expiration = datetime.utcnow() + expires_delta
-#     token = jwt.encode({"sub": vk_user_id, "exp": expiration}, SECRET_KEY, algorithm="HS256")
-#     return token
+def create_jwt_token(vk_user_id: str, expires_delta: timedelta):
+    expiration = datetime.utcnow() + expires_delta
+    token = jwt.encode({"sub": vk_user_id, "exp": expiration}, SECRET_KEY, algorithm="HS256")
+    return token
 
-# @rt.post("/auth")
-# async def vk_auth(data: VKAuthRequest, response: Response):
-#     # if user not exists - create in db
-#     # else exists
-
-#     vk_user_id = data.vk_user_id  # Эмулируем получение ID пользователя
-    
-#     # Создаем access и refresh токены
-#     access_token = create_jwt_token(vk_user_id, timedelta(minutes=15))
-#     refresh_token = create_jwt_token(vk_user_id, timedelta(days=7))
-
-#     # Устанавливаем токены в куки
-#     response.set_cookie(
-#         key="access_token", 
-#         value=access_token, 
-#         httponly=True, 
-#         secure=True, 
-#         samesite="Strict", 
-#         max_age=SEVEN_DAYS)
-#     response.set_cookie(
-#         key="refresh_token", 
-#         value=refresh_token, 
-#         httponly=True, 
-#         secure=True, 
-#         samesite="Strict", 
-#         max_age=SEVEN_DAYS)
-    
-#     return {"message": "Авторизация успешна"}
-
-# # Эндпоинт для проверки авторизации
-# @rt.get("/auth")
 # async def check_auth(access_token: str = Cookie(None), refresh_token: str = Cookie(None), response: Response = None):
 #     if not access_token:
 #         # Если access_token отсутствует, отправляем ответ неавторизованного пользователя
@@ -102,10 +70,28 @@ async def validate_vk_token(access_token: str, user_id: int):
         return data["response"][0]["id"] == user_id
 
 @app.post("/auth", response_model=AuthResponse)
-async def validate_token(request: VKAuthRequest):
+async def validate_token(request: VKAuthRequest, response: Response):
     is_valid = await validate_vk_token(request.access_token, request.user_id)
 
     if is_valid:
+        access_token = create_jwt_token(vk_user_id, timedelta(days=7))
+        refresh_token = create_jwt_token(vk_user_id, timedelta(days=7))
+
+        response.set_cookie(
+            key="access_token", 
+            value=access_token, 
+            httponly=True, 
+            secure=True, 
+            samesite="Strict", 
+            max_age=SEVEN_DAYS)
+        response.set_cookie(
+            key="refresh_token", 
+            value=refresh_token, 
+            httponly=True, 
+            secure=True, 
+            samesite="Strict", 
+            max_age=SEVEN_DAYS)
+
         return AuthResponse(authorized=True, message="User authorized successfully")
     else:
         raise HTTPException(status_code=401, detail="Invalid token or user ID")
