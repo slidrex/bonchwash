@@ -1,7 +1,7 @@
 import "./AuthPage.css";
 import VKIDButton from "../VKIDButton";
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { redirect } from "react-router-dom";
 
 /*
 function getDates() {
@@ -26,25 +26,23 @@ function getDates() {
 }
 */
 function AuthPage() {
-    const navigate = useNavigate(); // Получаем функцию navigate
 
-    fetch('https://bonchwash.ru/api/v1/auth', {
+    let response = fetch('https://bonchwash.ru/api/v1/auth', {
         method: 'GET',
         credentials: 'include'  // Включаем куки в запросе
-    })
-    .then(response => {
-        if (!response.ok) throw new Error('Неавторизован');
-        return response.json();
-    })
-    .then(data => {
-        if (data.authorized) {
-            // Перенаправляем на страницу с таблицей, если авторизация успешна
-            navigate('/booking'); 
-        }
-    })
-    .catch(error => {
-        console.error('Ошибка проверки авторизации:', error);
     });
+
+    if (response.ok) { 
+        let data = response.json();
+        alert(data);
+        if (data.authorized) {
+            return redirect('/booking'); 
+        } else {
+            console.error(data);
+        }
+    } else {
+        console.log('Неавторизован');
+    }
 
 
     return (
