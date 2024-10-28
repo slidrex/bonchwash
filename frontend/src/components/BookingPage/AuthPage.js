@@ -1,6 +1,6 @@
 import "./AuthPage.css";
 import VKIDButton from "../VKIDButton";
-import React, { useEffect } from 'react';
+import React from 'react';
 import { redirect } from "react-router-dom";
 
 /*
