@@ -26,33 +26,23 @@ function getDates() {
 }
 */
 function AuthPage() {
-    // let headers = new Headers();
+    // let response = fetch('https://bonchwash.ru/api/v1/auth', {
+    //     method: 'GET',
+    //     credentials: 'include'  // Включаем куки в запросе
+    // });
 
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('Accept', 'application/json');
-
-    // headers.append('Access-Control-Allow-Origin', '*');
-    // headers.append('Access-Control-Allow-Credentials', 'true');
-
-    // headers.append('GET', 'POST');
-
-    let response = fetch('https://bonchwash.ru/api/v1/auth', {
-        method: 'GET',
-        credentials: 'include'  // Включаем куки в запросе
-    });
-
-    if (response.ok) { 
-        let data = response.json();
-        if (data.authorized) {
-            alert("AuthPage - authorized. Redirect to booking.");
-            console.log("AUTH:", data);
-            return redirect('/booking'); 
-        } else {
-            console.error(data);
-        }
-    } else {
-        console.log('Неавторизован');
-    }
+    // if (response.ok) { 
+    //     let data = response.json();
+    //     if (data.authorized) {
+    //         alert("AuthPage - authorized. Redirect to booking.");
+    //         console.log("AUTH:", data);
+    //         return redirect('/booking'); 
+    //     } else {
+    //         console.error(data);
+    //     }
+    // } else {
+    //     console.log('Неавторизован');
+    // }
 
 
     return (
