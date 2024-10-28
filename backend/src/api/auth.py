@@ -69,7 +69,7 @@ async def validate_vk_token(access_token: str, user_id: int):
             )
         return data["response"][0]["id"] == user_id
 
-@app.post("/auth", response_model=AuthResponse)
+@rt.post("/auth", response_model=AuthResponse)
 async def validate_token(request: VKAuthRequest, response: Response):
     is_valid = await validate_vk_token(request.access_token, request.user_id)
 
