@@ -48,7 +48,7 @@ jobs:
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
 
           # Copy the application files to the server
-          scp -r ./ $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back
+          scp -r ./backend/* $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back
 
           # Restart Gunicorn service (или другой WSGI сервер)
           ssh $SSH_USER@$SSH_HOST "sudo systemctl restart bonchwash-api-service"
