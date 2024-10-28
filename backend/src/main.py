@@ -11,6 +11,7 @@ app.include_router(auth_rt, prefix='/v1')
 # app.include_router(personal_rt, prefix='/v1')
 # app.include_router(admin_rt)
 
+
 @app.delete("/db/reset")
 def recreate_db():
     create_tables()  # Optionally recreate the database
