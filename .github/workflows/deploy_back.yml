@@ -48,14 +48,18 @@ jobs:
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
 
           # Copy the application files to the server
+<<<<<<< HEAD
           rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back/
+=======
+          scp -r ./backend/* $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back/
+>>>>>>> a3a709f69c6e22daa60bceaded102e1aabca0f58
 
           # Restart Gunicorn service (или другой WSGI сервер)
-          ssh $SSH_USER@$SSH_HOST "sudo systemctl restart bonchwash-api-service"
+          ssh $SSH_USER@$SSH_HOST "sudo systemctl restart bonchwash-api.service"
 
       # Step 6: Final sync with rsync
       - name: Final Deployment with rsync
         run: |
-          rsync -avz --delete-after ./* $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back
+          rsync -avz --delete-after ./* $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
