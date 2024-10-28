@@ -49,10 +49,10 @@ jobs:
           
           # Copy the application files to the server
 
-          rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/root/backend/
-          
+          scp -r ./backend/ $SSH_USER@$SSH_HOST:/root/backend/
+          ssh $SSH_USER@$SSH_HOST "sudo python3 -m venv /root/backend/venv"
           ssh $SSH_USER@$SSH_HOST << 'EOF'
-            python3 -m venv /root/backend/venv
+            
 
             sudo /root/backend/venv/bin/pip install --upgrade pip
             sudo /root/backend/venv/bin/pip install -r /root/backend/requirements.txt
