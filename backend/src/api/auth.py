@@ -15,6 +15,8 @@ from fastapi import HTTPException, Response, Cookie, Depends
 from datetime import datetime, timedelta
 import jwt
 
+import httpx
+
 SEVEN_DAYS = 7 * 24 * 60 * 60  # 604800 seconds
 
 rt = APIRouter()
@@ -69,13 +71,13 @@ async def validate_vk_token(access_token: str, user_id: int):
             )
         return data["response"][0]["id"] == user_id
 
-@rt.post("/auth", response_model=AuthResponse)
+@rt.post("/auth", response_model=VKAuthResponse)
 async def validate_token(request: VKAuthRequest, response: Response):
     is_valid = await validate_vk_token(request.access_token, request.user_id)
 
     if is_valid:
-        access_token = create_jwt_token(vk_user_id, timedelta(days=7))
-        refresh_token = create_jwt_token(vk_user_id, timedelta(days=7))
+        access_token = create_jwt_token(request.user_id, timedelta(days=7))
+        refresh_token = create_jwt_token(request.user_id, timedelta(days=7))
 
         response.set_cookie(
             key="access_token", 
@@ -92,7 +94,7 @@ async def validate_token(request: VKAuthRequest, response: Response):
             samesite="Strict", 
             max_age=SEVEN_DAYS)
 
-        return AuthResponse(authorized=True, message="User authorized successfully")
+        return VKAuthResponse(authorized=True, message="User authorized successfully")
     else:
         raise HTTPException(status_code=401, detail="Invalid token or user ID")
 
