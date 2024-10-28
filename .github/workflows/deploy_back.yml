@@ -59,6 +59,6 @@ jobs:
       # Step 6: Final sync with rsync
       - name: Final Deployment with rsync
         run: |
-          rsync -avz --delete-after ./* $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back/
+          rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/var/www/html/bonchwash-back/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
