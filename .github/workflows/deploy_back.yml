@@ -51,9 +51,8 @@ jobs:
 
           rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/root/backend/
 
-          rm -rf /root/backend/venv
-          python3 -m venv /root/backend/venv
-          /root/backend/venv/bin/pip install -r /root/backend/requirements.txt
+          sudo python3 -m venv /root/backend/venv
+          sudo /root/backend/venv/bin/pip install -r /root/backend/requirements.txt
           sudo systemctl restart bonchwash-api.service
 
 
