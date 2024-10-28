@@ -51,12 +51,14 @@ jobs:
 
           rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/root/backend/
           
-          ssh $SSH_USER@$SSH_HOST "sudo python3 -m venv /root/backend"
-          ssh $SSH_USER@$SSH_HOST "sudo /root/backend/venv/bin/pip install -r /root/backend/requirements.txt"
+          ssh $SSH_USER@$SSH_HOST << 'EOF'
+            sudo rm -rf /root/backend/venv
+            sudo python3 -m venv /root/backend/venv
 
-
-          # Restart Gunicorn service (или другой WSGI сервер)
-          ssh $SSH_USER@$SSH_HOST "sudo systemctl restart bonchwash-api.service"
+            sudo /root/backend/venv/bin/pip install --upgrade pip
+            sudo /root/backend/venv/bin/pip install -r /root/backend/requirements.txt
+            sudo systemctl restart bonchwash-api.service
+          EOF
 
       # Step 6: Final sync with rsync
       - name: Final Deployment with rsync
