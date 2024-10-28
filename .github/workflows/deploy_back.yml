@@ -50,10 +50,9 @@ jobs:
           # Copy the application files to the server
 
           rsync -avz --delete-after ./backend/ $SSH_USER@$SSH_HOST:/root/backend/
-          su -
-          python3 -m venv /root/backend
-          /root/backend/venv/bin/pip install -r /root/backend/requirements.txt
-          sudo systemctl restart bonchwash-api.service
+          
+          ssh $SSH_USER@$SSH_HOST "sudo python3 -m venv /root/backend"
+          ssh $SSH_USER@$SSH_HOST "sudo /root/backend/venv/bin/pip install -r /root/backend/requirements.txt"
 
 
           # Restart Gunicorn service (или другой WSGI сервер)
