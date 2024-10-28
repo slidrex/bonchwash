@@ -73,7 +73,7 @@ async def validate_vk_token(access_token: str, user_id: int):
 
 @rt.post("/auth", response_model=VKAuthResponse)
 async def validate_token(request: VKAuthRequest, response: Response):
-    is_valid = await validate_vk_token(request.access_token, request.user_id)
+    is_valid = await validate_vk_token(request.access_token, request.vk_user_id)
 
     if is_valid:
         access_token = create_jwt_token(request.vk_user_id, timedelta(days=7))
