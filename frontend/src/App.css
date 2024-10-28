@@ -35,7 +35,7 @@ body {
   color: white;
   font-size: 17px;
   line-height: 22px;
-  padding: 14px 24px;
+  padding: 8px 24px;
   border-radius: var(--input-border-radius);
   font-weight: bold;
   cursor: pointer;

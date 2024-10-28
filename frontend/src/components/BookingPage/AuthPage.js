@@ -60,7 +60,6 @@ function AuthPage() {
                 <VKIDButton/>
             </div>
         </div>
-
     );
 }
 

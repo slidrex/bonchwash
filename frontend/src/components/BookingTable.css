@@ -1,12 +1,18 @@
-.wash-index{
+.wash-index {
+    border-radius: 8px;
+    padding: 10px 8px;
+    background: white;
+    border: 1px solid #E1E3E6;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 100%;
 }
 .column{
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    gap: 4px;
-
+    gap: 1vh;
 }
 .column *{
     width: 100%;
@@ -44,6 +50,14 @@
 .wash-index{
     border: 1px solid var(--stroke-color)
 }
+@media (min-width: 500px) {
+
+    .user-info{
+        width: 30vw;
+    }
+}
+
+
 @media(max-width: 450px)
 {
     .timestamp{
