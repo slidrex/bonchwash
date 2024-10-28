@@ -1,5 +1,6 @@
 import BookingTable from "../BookingTable";
 import './BookingPage.css'
+import { redirect } from "react-router-dom";
 
 function BookingPage() {
 
@@ -43,7 +44,6 @@ function BookingPage() {
             <div className="body-content">
                     {carNumbers.map((value, rowIndex) => (
                         <BookingTable index={value}/>
-
                     ))}
             </div>
         </div>
