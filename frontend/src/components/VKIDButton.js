@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function VKIDButton() {
     const vkidContainerRef = useRef(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Проверяем, был ли уже добавлен скрипт VKID SDK
@@ -56,7 +58,7 @@ function VKIDButton() {
 
     function vkidOnSuccess(data) {
         console.log('Авторизация успешна:', data);
-        return redirect("/booking");
+        navigate("/");
     }
 
     function vkidOnError(error) {
