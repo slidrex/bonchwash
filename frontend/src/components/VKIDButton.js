@@ -6,9 +6,8 @@ function VKIDButton() {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // Проверяем, был ли уже добавлен скрипт VKID SDK
-        if (!window.VKIDSDK) {
+    // Проверяем, был ли уже добавлен скрипт VKID SDK
+    if (!window.VKIDSDK) {
             console.log("run")
             const script = document.createElement('script');
             script.src = 'https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js';
@@ -46,7 +45,6 @@ function VKIDButton() {
                                 .catch(vkidOnError);
                         });
                 }
-            };
 
             document.body.appendChild(script);
 
@@ -54,7 +52,6 @@ function VKIDButton() {
                 document.body.removeChild(script);
             };
         }
-    }, []);
 
     function vkidOnSuccess(data) {
         console.log('Авторизация успешна:', data);
