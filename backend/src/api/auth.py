@@ -24,7 +24,7 @@ rt = APIRouter()
 SECRET_KEY = "HALOBALOFAVOL@&!@$!^GDASDCVBNLMJRP_!"
 
 def create_jwt_token(vk_user_id: str, expires_delta: timedelta):
-    expiration = datetime.utcnow() + expires_delta
+    expiration = datetime.now(datetime.timezone.utc) + expires_delta
     token = jwt.encode({"sub": vk_user_id, "exp": expiration}, SECRET_KEY, algorithm="HS256")
     return token
 
