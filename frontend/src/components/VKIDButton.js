@@ -58,7 +58,7 @@ function VKIDButton() {
 
     function vkidOnSuccess(data) {
         console.log('Авторизация успешна:', data);
-        navigate("/");
+        navigate("/booking");
     }
 
     function vkidOnError(error) {
