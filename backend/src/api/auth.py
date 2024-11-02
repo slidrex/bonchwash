@@ -58,7 +58,7 @@ async def validate_vk_token(access_token: str, user_id: int):
     params = {
         "access_token": access_token,
         "user_ids": user_id,
-        "v": "5.131"
+        "v": "5.199"
     }
 
     async with httpx.AsyncClient() as client:
