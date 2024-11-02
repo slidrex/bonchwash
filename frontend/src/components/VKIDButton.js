@@ -37,19 +37,6 @@ function VKIDButton() {
                     })
                         .on(VKID.WidgetEvents.ERROR, vkidOnError)
                         .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
-                            fetch('https://bonchwash.ru/api/v1/auth', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                credentials: 'include', 
-                                body: JSON.stringify({
-                                    access_token: data.access_token,
-                                    refresh_token: data.refresh_token,
-                                    vk_user_id: data.user_id,
-                                }) 
-                            })
-                            
                             const { code, device_id: deviceId } = payload;
 
                             VKID.Auth.exchangeCode(code, deviceId)
