@@ -1,13 +1,12 @@
-import React, { useRef } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef } from 'react';
+import { redirect } from "react-router-dom";
 
 function VKIDButton() {
     const vkidContainerRef = useRef(null);
 
-    const navigate = useNavigate();
-
-    // Проверяем, был ли уже добавлен скрипт VKID SDK
-    if (!window.VKIDSDK) {
+    useEffect(() => {
+        // Проверяем, был ли уже добавлен скрипт VKID SDK
+        if (!window.VKIDSDK) {
             console.log("run")
             const script = document.createElement('script');
             script.src = 'https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js';
@@ -45,6 +44,7 @@ function VKIDButton() {
                                 .catch(vkidOnError);
                         });
                 }
+            };
 
             document.body.appendChild(script);
 
@@ -52,10 +52,31 @@ function VKIDButton() {
                 document.body.removeChild(script);
             };
         }
+    }, []);
 
     function vkidOnSuccess(data) {
         console.log('Авторизация успешна:', data);
-        navigate("/booking");
+        fetch('https://bonchwash.ru/api/v1/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include', 
+            body: JSON.stringify({
+                access_token: data.access_token,
+                refresh_token: data.refresh_token,
+                vk_user_id: data.user_id,
+            }) 
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Authentication failed');
+            return response.json();
+        })
+        .then(data => {
+            console.log('Authentication successful:', data);
+            return redirect("/booking");
+        })
+        .catch(error => console.error('Auth Error:', error));
     }
 
     function vkidOnError(error) {
