@@ -37,3 +37,5 @@
 ./frontend/packages/react-devtools-inline/dist
 ./frontend/packages/react-devtools-shell/dist
 ./frontend/packages/react-devtools-timeline/dist
+frontend/build
+package-lock.json

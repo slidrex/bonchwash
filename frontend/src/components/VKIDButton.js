@@ -56,27 +56,27 @@ function VKIDButton() {
 
     function vkidOnSuccess(data) {
         console.log('Авторизация успешна:', data);
-        // fetch('https://bonchwash.ru/api/v1/auth', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     credentials: 'include',
-        //     body: JSON.stringify({
-        //         access_token: data.access_token,
-        //         refresh_token: data.refresh_token,
-        //         vk_user_id: data.user_id,
-        //     })
-        // })
-        // .then(response => {
-        //     if (!response.ok) throw new Error('Authentication failed');
-        //     return response.json();
-        // })
-        // .then(data => {
-        //     console.log('Authentication successful:', data);
-        //     return redirect("/booking");
-        // })
-        // .catch(error => console.error('Error:', error));
+        fetch('https://bonchwash.ru/api/v1/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include', 
+            body: JSON.stringify({
+                access_token: data.access_token,
+                refresh_token: data.refresh_token,
+                vk_user_id: data.user_id,
+            }) 
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Authentication failed');
+            return response.json();
+        })
+        .then(data => {
+            console.log('Authentication successful:', data);
+            return redirect("/booking");
+        })
+        .catch(error => console.error('Auth Error:', error));
     }
 
     function vkidOnError(error) {

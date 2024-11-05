@@ -24,7 +24,7 @@ rt = APIRouter()
 SECRET_KEY = "HALOBALOFAVOL@&!@$!^GDASDCVBNLMJRP_!"
 
 def create_jwt_token(vk_user_id: str, expires_delta: timedelta):
-    expiration = datetime.utcnow() + expires_delta
+    expiration = datetime.now(datetime.timezone.utc) + expires_delta
     token = jwt.encode({"sub": vk_user_id, "exp": expiration}, SECRET_KEY, algorithm="HS256")
     return token
 
@@ -58,7 +58,7 @@ async def validate_vk_token(access_token: str, user_id: int):
     params = {
         "access_token": access_token,
         "user_ids": user_id,
-        "v": "5.131"
+        "v": "5.199"
     }
 
     async with httpx.AsyncClient() as client:
@@ -73,11 +73,11 @@ async def validate_vk_token(access_token: str, user_id: int):
 
 @rt.post("/auth", response_model=VKAuthResponse)
 async def validate_token(request: VKAuthRequest, response: Response):
-    is_valid = await validate_vk_token(request.access_token, request.user_id)
+    is_valid = await validate_vk_token(request.access_token, request.vk_user_id)
 
     if is_valid:
-        access_token = create_jwt_token(request.user_id, timedelta(days=7))
-        refresh_token = create_jwt_token(request.user_id, timedelta(days=7))
+        access_token = create_jwt_token(request.vk_user_id, timedelta(days=7))
+        refresh_token = create_jwt_token(request.vk_user_id, timedelta(days=7))
 
         response.set_cookie(
             key="access_token", 
