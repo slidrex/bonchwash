@@ -9,7 +9,7 @@ function BookingPage() {
     const room = location.state?.room || '314'; // Default to '314' if no state is passed
     const [userInfo, setUserInfo] = useState({ name: 'Вячеслав Носов', room });
     const [activeButton, setActiveButton] = useState('today');
-    const [occupiedSlots, setOccupiedSlots] = useState({
+    const [occupiedSlots] = useState({
         "201": ["1-9", "3-11", "5-12"],
         "202": ["2-11", "4-13", "1-10"],
         // ... other slots

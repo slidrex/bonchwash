@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AuthPage from "./components/BookingPage/AuthPage";
 import BasicCredentialsPage from "./components/BookingPage/BasicCredentialsPage";
 import BookingPage from "./components/BookingPage/BookingPage";
 
