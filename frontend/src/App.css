@@ -23,10 +23,6 @@ body {
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   height: 100%;
   width: 100%;
 }
@@ -35,12 +31,13 @@ body {
   color: white;
   font-size: 17px;
   line-height: 22px;
-  padding: 14px 24px;
+  padding: 8px 24px;
   border-radius: var(--input-border-radius);
   font-weight: bold;
   cursor: pointer;
   border: none;
   font-family: 'Roboto Medium', sans-serif;
+  backdrop-filter: blur(8px);
 }
 .primary{
   background-color: var(--primary-button-color);
@@ -49,10 +46,13 @@ body {
   color: #67A21E;
   background-color: var(--secondary-button-color);
 }
+.cancel{
+  background: rgba(208, 44, 44, 0.15);
+ color: #FF5555;
+}
 .test-container{
   position: absolute;
   display: flex;
-
 }
 .test1001{
   padding: 5px;

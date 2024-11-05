@@ -1,54 +1,147 @@
 .body-content{
-    height: 100%;
-    width: 100%;
+    min-height: 650px;
     display: flex;
-    gap: 4px;
     flex-direction: row;
     justify-content: center;
+    flex-grow: 1;
+    gap: 4px;
+    overflow-x: auto;
+    margin: 0 5vw;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.body-content::-webkit-scrollbar {
+    display: none;
 }
 .container{
-    display: flex;
+    background-image: url('/public/bg_pattern.png');
     flex-direction: column;
     height: 100%;
     width: 100%;
+    overflow-y: auto;
 }
+
+.today, .tomorrow, .after-tomorrow{
+    font-size: 16px;
+}
+
 .header{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+
 }
 .book-buttons{
-    display: flex; /* Makes the container only as wide as its contents */
+    display: flex;
     justify-content: center;
-    gap: 4px;
+    gap: 2vw;
+    width: 100%;
     text-align: center;
     margin-bottom: 24px;
     margin-top: 8px;
 }
 .time-holder{
-    width: 110px;
     display: flex;
-    padding: 5px 10px 5px 10px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 10vw;
+    border-radius: 12px;
 }
 .inline-book{
-    font-weight: normal;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 13px;
     justify-content: center;
     letter-spacing: -0.43px;
 
 }
-@media(max-height:750px){
-    .book-buttons{
-        margin-bottom: 10px;
-        margin-top: 4px;
+.user-info {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid #E1E3E6;
+    width: 20rem;
+    height: 5vh;
+    background: #F8F9FA;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 19px;
+    text-align: center;
+    color: #000000;
+    border-radius: 12px;
+
+}
+.user-info p{
+    margin: 0;
+}
+
+@media (min-width: 770px) {
+    .body-content {
+        margin: 0 auto;
+        max-width: 700px;
+    }
+    .header{
+        max-width: 700px;
+        margin: 0 auto;
     }
 }
-@media(max-width:380px){
+@media (max-width: 575px) {
     .time-holder{
-        width: 90px;
+        width: 14vw;
+    }
+}
+
+
+
+@media (max-width: 410px) {
+    .time-holder{
+        width: 15vw;
+    }
+    .user-info{
+        width: 80%;
+    }
+}
+@media (max-width: 457px) {
+    .body-content{
+        margin: 0 4vw;
+    }
+}
+
+@media (max-width: 386px) {
+    .inline-book{
+        font-size: 12px;
+    }
+    .body-content{
+        margin: 0 2vw;
+    }
+}
+@media(max-width:355px){
+    .time-holder{
+        width: 15vw;
+    }
+    .today, .tomorrow, .after-tomorrow{
+        font-size: 14px;
+    }
+    .inline-book{
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 318px) {
+    .time-holder{
+        width: 15vw;
+    }
+    .today, .tomorrow, .after-tomorrow{
+        font-size: 13px;
+    }
+    .inline-book{
+        font-size: 10px;
     }
 }
 
