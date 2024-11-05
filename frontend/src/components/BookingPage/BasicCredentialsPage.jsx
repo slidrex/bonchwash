@@ -32,7 +32,7 @@ function BasicCredentialsPage(props) {
                 </div>
                 <button className={`btn ${isValid ? "primary" : ""}`} type={"submit"}>Готово</button>
                 <div className="footer-info">
-                    <label className={"footer-label"}>                    Важно! Указывайте настоящие данные. Они проходят проверку модерацией
+                    <label className={"footer-label"}>Важно! Указывайте настоящие данные. Они проходят проверку модерацией
                     </label>
                 </div>
             </div>

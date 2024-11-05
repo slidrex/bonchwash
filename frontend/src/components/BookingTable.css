@@ -1,15 +1,15 @@
-.wash-index {
+.wash-index.book-placeholder {
     border-radius: 8px;
-    padding: 10px 8px;
+    padding: 5px 8px;
     background: white;
     border: 1px solid #E1E3E6;
-    position: sticky;
     top: 0;
     z-index: 1;
     width: 100%;
 }
 .column{
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     align-items: center;
     gap: 1vh;
@@ -25,8 +25,8 @@
     justify-content: center;
     align-items: center;
     padding-inline: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
 
 }
 .book-placeholder{
@@ -57,6 +57,12 @@
     }
 }
 
+@media (min-width: 920px) {
+    .column{
+        flex: 2;
+    }
+}
+
 
 @media(max-width: 450px)
 {
@@ -71,7 +77,7 @@
         padding-bottom: 7px;
 }
 }
-@media(max-width:400px){
+@media(max-width:420px){
     .innes{
         display: none;
     }

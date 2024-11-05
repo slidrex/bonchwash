@@ -23,10 +23,6 @@ body {
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
   height: 100%;
   width: 100%;
 }
@@ -52,7 +48,6 @@ body {
 .test-container{
   position: absolute;
   display: flex;
-
 }
 .test1001{
   padding: 5px;
