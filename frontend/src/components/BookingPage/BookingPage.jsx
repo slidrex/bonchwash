@@ -1,12 +1,20 @@
-import BookingTable from "../BookingTable";
-import './BookingPage.css'
-import { redirect } from "react-router-dom";
-import {useEffect, useState} from "react";
+import React, { useEffect, useState } from 'react';
+import BookingTable from '../BookingTable';
+import Modal from './Modal';
+import './BookingPage.css';
 
 function BookingPage() {
-
     const [userInfo, setUserInfo] = useState({ name: 'Вячеслав Носов', room: '314' });
     const [activeButton, setActiveButton] = useState('today');
+    const [occupiedSlots, setOccupiedSlots] = useState({
+        "201": ["1-9", "3-11", "5-12"],
+        "202": ["2-11", "4-13", "1-10"],
+        // ... other slots
+    });
+    const [confirmedSlots, setConfirmedSlots] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedSlot, setSelectedSlot] = useState(null);
+    const [isCancelMode, setIsCancelMode] = useState(false);
 
     useEffect(() => {
         async function fetchUserInfo() {
@@ -29,21 +37,32 @@ function BookingPage() {
         fetchUserInfo().then(r => console.log('User info fetched'));
     }, []);
 
-    // let response = fetch('', {
-    //     method: 'GET',
-    //     credentials: 'include'  // Включаем куки в запросе
-    // });
+    const handleSlotClick = (slot) => {
+        if (confirmedSlots.includes(slot)) {
+            setIsCancelMode(true);
+        } else {
+            setIsCancelMode(false);
+        }
+        setSelectedSlot(slot);
+        setShowModal(true);
+    };
 
-    // if (response.ok) {
-    //     let data = response.json();
-    //     if (!data.authorized) {
-    //         alert("BookingPage - Unauthorized. Redirect to login.");
-    //         return redirect('/');
-    //     }
-    // }
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedSlot(null);
+    };
 
-    const carNumbers = [1, 2, 3, 4, 5, 6, 7];
+    const handleConfirm = () => {
+        if (isCancelMode) {
+            setConfirmedSlots(confirmedSlots.filter(slot => slot !== selectedSlot));
+        } else {
+            setConfirmedSlots([...confirmedSlots, selectedSlot]);
+        }
+        setShowModal(false);
+        setSelectedSlot(null);
+    };
 
+    const machineNumbers = [1, 2, 3, 4, 5, 6, 7];
 
     return (
         <div className='container'>
@@ -76,10 +95,17 @@ function BookingPage() {
                 </div>
             </div>
             <div className="body-content">
-                {carNumbers.map((value, rowIndex) => (
-                    <BookingTable index={value} key={rowIndex} />
+                {machineNumbers.map((value, rowIndex) => (
+                    <BookingTable
+                        index={value}
+                        key={rowIndex}
+                        occupiedSlots={occupiedSlots}
+                        confirmedSlots={confirmedSlots}
+                        onSlotClick={handleSlotClick}
+                    />
                 ))}
             </div>
+            <Modal show={showModal} onClose={handleCloseModal} onConfirm={handleConfirm} isCancelMode={isCancelMode} />
         </div>
     );
 }

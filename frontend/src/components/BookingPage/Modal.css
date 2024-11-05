@@ -1,0 +1,43 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.modal-content {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    width: 90%;
+    padding: 20px;
+    text-align: center;
+    margin-top: 16px;
+    animation: slide-down 0.5s ease-out;
+    box-sizing: border-box;
+    background: #F8F9FA;
+    border: 1px solid #E1E3E6;
+    border-radius: 16px;
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

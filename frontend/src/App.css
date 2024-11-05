@@ -37,6 +37,7 @@ body {
   cursor: pointer;
   border: none;
   font-family: 'Roboto Medium', sans-serif;
+  backdrop-filter: blur(8px);
 }
 .primary{
   background-color: var(--primary-button-color);
@@ -44,6 +45,10 @@ body {
 .secondary{
   color: #67A21E;
   background-color: var(--secondary-button-color);
+}
+.cancel{
+  background: rgba(208, 44, 44, 0.15);
+ color: #FF5555;
 }
 .test-container{
   position: absolute;

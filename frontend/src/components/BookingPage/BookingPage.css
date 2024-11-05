@@ -5,7 +5,7 @@
     justify-content: center;
     flex-grow: 1;
     gap: 4px;
-    overflow-y: auto;
+    overflow-x: auto;
     margin: 0 5vw;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -77,12 +77,9 @@
     border-radius: 12px;
 
 }
-
 .user-info p{
     margin: 0;
 }
-
-
 
 @media (min-width: 770px) {
     .body-content {

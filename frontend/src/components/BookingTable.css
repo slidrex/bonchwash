@@ -1,11 +1,9 @@
 .wash-index.book-placeholder {
     border-radius: 8px;
-    padding: 5px 8px;
     background: white;
     border: 1px solid #E1E3E6;
-    top: 0;
-    z-index: 1;
     width: 100%;
+    height: 3vh;
 }
 .column{
     display: flex;
@@ -13,6 +11,8 @@
     flex-direction: column;
     align-items: center;
     gap: 1vh;
+    min-width: 0; /* Добавьте это, чтобы разрешить уменьшение ширины */
+    min-height: 0; /* Добавьте это, чтобы разрешить уменьшение высоты */
 }
 .column *{
     width: 100%;
@@ -24,9 +24,6 @@
     position: relative;
     justify-content: center;
     align-items: center;
-    padding-inline: 5px;
-    padding-top: 7px;
-    padding-bottom: 7px;
 
 }
 .book-placeholder{
@@ -39,12 +36,35 @@
     box-sizing: border-box;
     font-weight: bold;
 }
+.confirmed {
+    animation: fill-green 0.5s ease-in-out forwards;
+    background-color: var(--primary-button-color);
+    color: white;
+}
+.confirmed .inline-time{
+    color: #cde6ac;
+}
+.occupied {
+
+    color: #f6a2a2;
+    background: rgba(208, 44, 44, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+}
+.timestamp, .occupied {
+    width: 100%;
+    height: 6vh;
+    box-sizing: border-box;
+}
+.occupied-room {
+    font-size: 16px;
+}
 .main-time{
     font-size:16px;
 }
 .inline-time{
     font-weight: normal;
-    font-size: 11px;
+    font-size: 10px;
     color: rgba(83, 83, 83, 0.51);
 }
 .wash-index{
@@ -62,23 +82,28 @@
         flex: 2;
     }
 }
-
-
-@media(max-width: 450px)
-{
-    .timestamp{
-        padding-inline: 2px;
-
+@media(max-height: 700px){
+    .wash-index.book-placeholder {
+        height: 3vh;
+    }
+    .timestamp, .occupied {
+        height: 7vh;
     }
 }
-@media(max-height: 670px) {
-    .timestamp{
-        padding-top:7px;
-        padding-bottom: 7px;
-}
-}
+
 @media(max-width:420px){
     .innes{
         display: none;
+    }
+}
+
+@keyframes fill-green {
+    from {
+        background-color: transparent;
+        color: black;
+    }
+    to {
+        background-color: var(--primary-button-color);
+        color: white;
     }
 }
