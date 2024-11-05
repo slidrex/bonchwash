@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import BookingTable from '../BookingTable';
 import Modal from './Modal';
 import './BookingPage.css';
+import {useLocation} from "react-router-dom";
 
 function BookingPage() {
-    const [userInfo, setUserInfo] = useState({ name: 'Вячеслав Носов', room: '314' });
+    const location = useLocation();
+    const room = location.state?.room || '314'; // Default to '314' if no state is passed
+    const [userInfo, setUserInfo] = useState({ name: 'Вячеслав Носов', room });
     const [activeButton, setActiveButton] = useState('today');
     const [occupiedSlots, setOccupiedSlots] = useState({
         "201": ["1-9", "3-11", "5-12"],
