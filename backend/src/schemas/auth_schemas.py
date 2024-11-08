@@ -8,3 +8,6 @@ class VKAuthRequest(BaseModel):
 class VKAuthResponse(BaseModel):
     authorized: bool
     message: str
+class VKExchangeRequest(BaseModel):
+    device_id:str
+    code: str

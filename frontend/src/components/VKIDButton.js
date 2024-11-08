@@ -39,9 +39,24 @@ function VKIDButton() {
                         .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
                             const { code, device_id: deviceId } = payload;
 
-                            VKID.Auth.exchangeCode(code, deviceId)
-                                .then(vkidOnSuccess)
-                                .catch(vkidOnError);
+                            fetch("https://bonchwash.ru/exchange-code", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    code: code,
+                                    device_id: deviceId,
+                                }),
+                            })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error("Failed to exchange code");
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => vkidOnSuccess(data))
+                                .catch(error => vkidOnError(error));
                         });
                 }
             };

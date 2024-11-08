@@ -4,11 +4,11 @@ from entities.entity_models import SessionLocal, User, Book
 
 from schemas.user_schemas import UserCreate, UserResponse,ShortUserResponse
 from schemas.book_schemas import BookCreate
-from schemas.auth_schemas import VKAuthRequest, VKAuthResponse
+from schemas.auth_schemas import VKAuthRequest, VKAuthResponse, VKExchangeRequest
 
 from entities.entity_models import get_db
 from sqlalchemy.orm import Session
-
+import requests
 from typing import List
 
 from fastapi import HTTPException, Response, Cookie, Depends
@@ -70,6 +70,30 @@ async def validate_vk_token(access_token: str, user_id: int):
                 status_code=401, detail="Invalid VK access token or user_id"
             )
         return data["response"][0]["id"] == user_id
+@rt.post("/exchange-code")
+async def exhcange_code(request: VKExchangeRequest):
+    code = request.code
+    device_id = request.device_id
+
+
+    url = "https://id.vk.com/oauth2/auth"
+
+
+    data = {
+        "grant_type": "authorization_code",
+        "code": code,
+        "device_id": device_id
+    }
+
+    # Отправка запроса
+    response = requests.post(url, data=data)
+
+    # Проверка ответа
+    if response.status_code == 200:
+        print("Tokens:", response.json())
+    else:
+        print("Error:", response.status_code, response.text)
+
 
 @rt.post("/auth", response_model=VKAuthResponse)
 async def validate_token(request: VKAuthRequest, response: Response):
