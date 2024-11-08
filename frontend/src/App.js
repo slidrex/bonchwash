@@ -9,10 +9,9 @@ function App() {
         <Router>
             <div className="App">
                 <Routes>
-                    {/* <Route path="/" element={<AuthPage />} /> */  }
+                    { <Route path="/" element={<VKIDButton />} />   }
                     <Route path="/credentials" element={<BasicCredentialsPage />} />
                     <Route path="/booking" element={<BookingPage />} />
-                    <Route path="/auth" element={<VKIDButton />} />
                 </Routes>
             </div>
         </Router>
