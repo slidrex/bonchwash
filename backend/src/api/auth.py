@@ -88,7 +88,7 @@ async def init_auth():
 @rt.post("/exchange-code")
 async def exchange_code(request: VKExchangeRequest):
     # URL для обмена кода на токены
-    url = "https://id.vk.com/oauth2/token"
+    url = "https://id.vk.com/oauth2/auth"
 
     data = {
         "grant_type": "authorization_code",
