@@ -4,7 +4,11 @@ from entities.entity_models import SessionLocal, User, Book
 
 from schemas.user_schemas import UserCreate, UserResponse,ShortUserResponse
 from schemas.book_schemas import BookCreate
-from schemas.auth_schemas import VKAuthRequest, VKAuthResponse, VKExchangeRequest
+from schemas.auth_schemas import VKAuthRequest,VKInitResponse , VKAuthResponse, VKExchangeRequest
+import secrets
+import requests
+import hashlib
+import base64
 
 from entities.entity_models import get_db
 from sqlalchemy.orm import Session
@@ -70,33 +74,41 @@ async def validate_vk_token(access_token: str, user_id: int):
                 status_code=401, detail="Invalid VK access token or user_id"
             )
         return data["response"][0]["id"] == user_id
+
+@rt.get("/init-auth")
+async def init_auth():
+    # Генерация code_verifier и code_challenge
+    code_verifier = secrets.token_urlsafe(64)
+    sha256 = hashlib.sha256()
+    sha256.update(code_verifier.encode('utf-8'))
+    code_challenge = base64.urlsafe_b64encode(sha256.digest()).decode('utf-8').rstrip('=')
+
+    return VKInitResponse(code_challenge=code_challenge, code_verifier=code_verifier)
+
 @rt.post("/exchange-code")
-async def exhcange_code(request: VKExchangeRequest):
-    code = request.code
-    device_id = request.device_id
-
-
-    url = "https://id.vk.com/oauth2/auth"
-
+async def exchange_code(request: VKExchangeRequest):
+    # URL для обмена кода на токены
+    url = "https://id.vk.com/oauth2/token"
 
     data = {
         "grant_type": "authorization_code",
-        "code": code,
-        "code_challenge" : request.code_challenge,
-        "redirect_uri" : "https://bonchwash.ru",
-        "client_id":52503899,
-        "device_id": device_id
+        "code": request.code,
+        "redirect_uri": request.redirect_uri,
+        "client_id": request.client_id,
+        "code_verifier": request.state,  # Здесь передаём `code_verifier`
+        "device_id": request.device_id,
+        "state": request.state
     }
 
     # Отправка запроса
     response = requests.post(url, data=data)
 
-    # Проверка ответа
+    # Проверка ответа и возврат токенов
     if response.status_code == 200:
-        print("Tokens:", response.json())
+        tokens = response.json()
+        return tokens
     else:
-        print("Error:", response.status_code, response.text)
-
+        raise HTTPException(status_code=response.status_code, detail=response.json())
 
 @rt.post("/auth", response_model=VKAuthResponse)
 async def validate_token(request: VKAuthRequest, response: Response):

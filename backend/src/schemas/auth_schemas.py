@@ -9,6 +9,12 @@ class VKAuthResponse(BaseModel):
     authorized: bool
     message: str
 class VKExchangeRequest(BaseModel):
-    device_id:str
-    code_challenge: str
     code: str
+    redirect_uri: str
+    client_id: int
+    device_id: str
+    state: str
+
+class VKInitResponse(BaseModel):
+    code_challenge: str
+    code_verifier: str
