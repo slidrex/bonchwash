@@ -82,7 +82,7 @@ async def exhcange_code(request: VKExchangeRequest):
     data = {
         "grant_type": "authorization_code",
         "code": code,
-        "redirect_uri" : "https://bonchwash.ru/booking",
+        "redirect_uri" : "https://bonchwash.ru",
         "client_id":52503899,
         "device_id": device_id
     }
