@@ -1,9 +1,38 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function VKIDButton() {
     const vkidContainerRef = useRef(null);
     const navigate = useNavigate();
+
+    const vkidOnSuccess = useCallback((data) => {
+        console.log('Авторизация успешна:', data);
+        fetch('https://bonchwash.ru/api/v1/auth', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                access_token: data.access_token,
+                refresh_token: data.refresh_token,
+                vk_user_id: data.user_id,
+            })
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('Authentication failed');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Authentication successful:', data);
+                navigate("/booking");
+            })
+            .catch(error => console.error('Auth Error:', error));
+    }, [navigate]);
+
+    function vkidOnError(error) {
+        console.error('Ошибка авторизации:', error);
+    }
 
     useEffect(() => {
         // Проверяем, был ли уже добавлен скрипт VKID SDK
@@ -16,7 +45,6 @@ function VKIDButton() {
             const code_verifier = 'Ozl_e9WZx-zKRaJIDGiwQ6Jh-OYHxJ_CuAS4OHyR9Xw';
 
             async function initializeVKID() {
-                // Преобразование code_verifier в code_challenge
                 const buffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(code_verifier));
                 const code_challenge = btoa(String.fromCharCode(...new Uint8Array(buffer)))
                     .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -81,36 +109,7 @@ function VKIDButton() {
                 document.body.removeChild(script);
             };
         }
-    }, []);
-
-    function vkidOnSuccess(data) {
-        console.log('Авторизация успешна:', data);
-        fetch('https://bonchwash.ru/api/v1/auth', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include',
-            body: JSON.stringify({
-                access_token: data.access_token,
-                refresh_token: data.refresh_token,
-                vk_user_id: data.user_id,
-            })
-        })
-            .then(response => {
-                if (!response.ok) throw new Error('Authentication failed');
-                return response.json();
-            })
-            .then(data => {
-                console.log('Authentication successful:', data);
-                navigate("/booking");
-            })
-            .catch(error => console.error('Auth Error:', error));
-    }
-
-    function vkidOnError(error) {
-        console.error('Ошибка авторизации:', error);
-    }
+    }, [vkidOnSuccess]);
 
     return <div ref={vkidContainerRef} />;
 }
