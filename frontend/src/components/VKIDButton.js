@@ -14,10 +14,10 @@ function VKIDButton() {
                 setCodeVerifier(data.code_verifier);
             })
             .catch(error => console.error("Ошибка инициализации авторизации VK:", error));
-    }, []);
+    }, []);  // This effect only runs once on component mount
 
     useEffect(() => {
-        if (codeChallenge && !window.VKIDSDK) {
+        if (codeChallenge && codeVerifier && !window.VKIDSDK) {
             const script = document.createElement('script');
             script.src = 'https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js';
             script.async = true;
@@ -81,7 +81,7 @@ function VKIDButton() {
                 document.body.removeChild(script);
             };
         }
-    }, [codeChallenge]);
+    }, [codeChallenge, codeVerifier]);  // Added codeVerifier as dependency
 
     return <div ref={vkidContainerRef} />;
 }
