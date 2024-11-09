@@ -11,7 +11,13 @@ function VKIDButton() {
             const script = document.createElement('script');
             script.src = 'https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js';
             script.async = true;
-            let codechallenge = "ejwfipowehjvih3"
+            let code_verifier = 'Ozl_e9WZx-zKRaJIDGiwQ6Jh-OYHxJ_CuAS4OHyR9Xw';
+
+// Преобразование в code_challenge
+                let codechallenge = crypto.subtle.digest("SHA-256", new TextEncoder().encode(code_verifier))
+                    .then(buffer => btoa(String.fromCharCode.apply(null, new Uint8Array(buffer)))
+                        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
+
             script.onload = () => {
                 if ('VKIDSDK' in window) {
                     const VKID = window.VKIDSDK;
