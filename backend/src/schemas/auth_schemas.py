@@ -10,4 +10,5 @@ class VKAuthResponse(BaseModel):
     message: str
 class VKExchangeRequest(BaseModel):
     device_id:str
+    code_challenge: str
     code: str
