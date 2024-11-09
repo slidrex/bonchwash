@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+
 function VKIDButton() {
     const vkidContainerRef = useRef(null);
     const [codeChallenge, setCodeChallenge] = useState(null);
-    const [codeVerifier, setCodeVerifier] = useState(null);
 
     useEffect(() => {
         // Запрашиваем данные с сервера
@@ -10,9 +10,8 @@ function VKIDButton() {
             .then(response => response.json())
             .then(data => {
                 setCodeChallenge(data.code_challenge);
-                setCodeVerifier(data.code_verifier);
 
-                // Сохраняем code_verifier в sessionStorage, чтобы не зависеть от URL после редиректа
+                // Сохраняем code_verifier в sessionStorage для использования после редиректа
                 sessionStorage.setItem('vk_code_verifier', data.code_verifier);
             })
             .catch(error => console.error("Ошибка инициализации авторизации VK:", error));
@@ -51,7 +50,7 @@ function VKIDButton() {
                         .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
                             const { code } = payload;
 
-                            // Получаем code_verifier из sessionStorage
+                            // Извлекаем code_verifier из sessionStorage
                             const codeVerifier = sessionStorage.getItem('vk_code_verifier');
 
                             // Отправка запроса для обмена кода на токены
@@ -65,7 +64,7 @@ function VKIDButton() {
                                     redirect_uri: 'https://bonchwash.ru',
                                     client_id: 52503899,
                                     device_id: payload.device_id,
-                                    state: codeVerifier  // Передаем сохранённый `code_verifier`
+                                    state: codeVerifier  // Используем сохранённый `code_verifier`
                                 }),
                             })
                                 .then(response => response.json())
@@ -90,6 +89,5 @@ function VKIDButton() {
 
     return <div ref={vkidContainerRef} />;
 }
-
 
 export default VKIDButton;
