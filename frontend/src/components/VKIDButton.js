@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function VKIDButton() {
     const vkidContainerRef = useRef(null);
@@ -35,9 +35,7 @@ function VKIDButton() {
     }
 
     useEffect(() => {
-        // Проверяем, был ли уже добавлен скрипт VKID SDK
         if (!window.VKIDSDK) {
-            console.log("run");
             const script = document.createElement('script');
             script.src = 'https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js';
             script.async = true;
