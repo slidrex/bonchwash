@@ -11,7 +11,7 @@ function VKIDButton() {
             const script = document.createElement('script');
             script.src = 'https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js';
             script.async = true;
-
+            let codechallenge = "ejwfipowehjvih3"
             script.onload = () => {
                 if ('VKIDSDK' in window) {
                     const VKID = window.VKIDSDK;
@@ -19,6 +19,7 @@ function VKIDButton() {
                     VKID.Config.init({
                         app: 52503899,
                         redirectUrl: 'https://bonchwash.ru',
+                        codeChallenge: codechallenge,
                         responseMode: VKID.ConfigResponseMode.Callback,
                         source: VKID.ConfigSource.LOWCODE,
                     });
@@ -37,7 +38,7 @@ function VKIDButton() {
                     })
                         .on(VKID.WidgetEvents.ERROR, vkidOnError)
                         .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
-                            const { code, device_id: deviceId, state } = payload;
+                            const { code, device_id: deviceId } = payload;
 
                             fetch("https://bonchwash.ru/api/v1/exchange-code", {
                                 method: "POST",
@@ -46,7 +47,7 @@ function VKIDButton() {
                                 },
                                 body: JSON.stringify({
                                     code: code,
-                                    code_challenge: state,
+                                    code_challenge: codechallenge,
                                     device_id: deviceId,
                                 }),
                             })
