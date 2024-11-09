@@ -1,75 +1,81 @@
 import React, { useEffect, useRef } from 'react';
-import { redirect } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function VKIDButton() {
     const vkidContainerRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Проверяем, был ли уже добавлен скрипт VKID SDK
         if (!window.VKIDSDK) {
-            console.log("run")
+            console.log("run");
             const script = document.createElement('script');
             script.src = 'https://unpkg.com/@vkid/sdk@<3.0.0/dist-sdk/umd/index.js';
             script.async = true;
-            let code_verifier = 'Ozl_e9WZx-zKRaJIDGiwQ6Jh-OYHxJ_CuAS4OHyR9Xw';
 
-// Преобразование в code_challenge
-                let codechallenge = crypto.subtle.digest("SHA-256", new TextEncoder().encode(code_verifier))
-                    .then(buffer => btoa(String.fromCharCode.apply(null, new Uint8Array(buffer)))
-                        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''));
+            const code_verifier = 'Ozl_e9WZx-zKRaJIDGiwQ6Jh-OYHxJ_CuAS4OHyR9Xw';
 
-            script.onload = () => {
-                if ('VKIDSDK' in window) {
-                    const VKID = window.VKIDSDK;
+            async function initializeVKID() {
+                // Преобразование code_verifier в code_challenge
+                const buffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(code_verifier));
+                const code_challenge = btoa(String.fromCharCode(...new Uint8Array(buffer)))
+                    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 
-                    VKID.Config.init({
-                        app: 52503899,
-                        redirectUrl: 'https://bonchwash.ru',
-                        codeChallenge: codechallenge,
-                        responseMode: VKID.ConfigResponseMode.Callback,
-                        source: VKID.ConfigSource.LOWCODE,
-                    });
+                script.onload = () => {
+                    if ('VKIDSDK' in window) {
+                        const VKID = window.VKIDSDK;
 
-                    const oneTap = new VKID.OneTap();
-
-                    oneTap.render({
-                        container: vkidContainerRef.current,
-                        fastAuthEnabled: false,
-                        showAlternativeLogin: true,
-                        styles: {
-                            borderRadius: 20,
-                            width: 370,
-                            height: 40,
-                        },
-                    })
-                        .on(VKID.WidgetEvents.ERROR, vkidOnError)
-                        .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
-                            const { code, device_id: deviceId } = payload;
-
-                            fetch("https://bonchwash.ru/api/v1/exchange-code", {
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                    code: code,
-                                    code_challenge: codechallenge,
-                                    device_id: deviceId,
-                                }),
-                            })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error("Failed to exchange code");
-                                    }
-                                    return response.json();
-                                })
-                                .then(data => vkidOnSuccess(data))
-                                .catch(error => vkidOnError(error));
+                        VKID.Config.init({
+                            app: 52503899,
+                            redirectUrl: 'https://bonchwash.ru',
+                            codeChallenge: code_challenge,
+                            responseMode: VKID.ConfigResponseMode.Callback,
+                            source: VKID.ConfigSource.LOWCODE,
                         });
-                }
-            };
 
-            document.body.appendChild(script);
+                        const oneTap = new VKID.OneTap();
+
+                        oneTap.render({
+                            container: vkidContainerRef.current,
+                            fastAuthEnabled: false,
+                            showAlternativeLogin: true,
+                            styles: {
+                                borderRadius: 20,
+                                width: 370,
+                                height: 40,
+                            },
+                        })
+                            .on(VKID.WidgetEvents.ERROR, vkidOnError)
+                            .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
+                                const { code, device_id: deviceId } = payload;
+
+                                fetch("https://bonchwash.ru/api/v1/exchange-code", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        code: code,
+                                        code_challenge: code_challenge,
+                                        device_id: deviceId,
+                                    }),
+                                })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error("Failed to exchange code");
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => vkidOnSuccess(data))
+                                    .catch(error => vkidOnError(error));
+                            });
+                    }
+                };
+
+                document.body.appendChild(script);
+            }
+
+            initializeVKID();
 
             return () => {
                 document.body.removeChild(script);
@@ -84,22 +90,22 @@ function VKIDButton() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            credentials: 'include', 
+            credentials: 'include',
             body: JSON.stringify({
                 access_token: data.access_token,
                 refresh_token: data.refresh_token,
                 vk_user_id: data.user_id,
-            }) 
+            })
         })
-        .then(response => {
-            if (!response.ok) throw new Error('Authentication failed');
-            return response.json();
-        })
-        .then(data => {
-            console.log('Authentication successful:', data);
-            return redirect("/booking");
-        })
-        .catch(error => console.error('Auth Error:', error));
+            .then(response => {
+                if (!response.ok) throw new Error('Authentication failed');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Authentication successful:', data);
+                navigate("/booking");
+            })
+            .catch(error => console.error('Auth Error:', error));
     }
 
     function vkidOnError(error) {
