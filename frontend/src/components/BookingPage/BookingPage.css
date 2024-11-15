@@ -37,7 +37,8 @@
     display: flex;
     justify-content: center;
     gap: 2vw;
-    width: 100%;
+    width: 90%;
+    max-width: 475px;
     text-align: center;
     margin-bottom: 24px;
     margin-top: 8px;
@@ -47,25 +48,29 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 10vw;
-    border-radius: 12px;
+    height: 50px;
+    width: 40%;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    font-family: 'Roboto Medium', sans-serif;
+    backdrop-filter: blur(8px);
+    font-size: 17px;
+    line-height: 22px;
+    border-radius: var(--input-border-radius);
 }
 .inline-book{
     font-weight: 500;
     font-size: 13px;
     justify-content: center;
     letter-spacing: -0.43px;
-
 }
 .user-info {
-    margin-top: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     border: 1px solid #E1E3E6;
-    width: 20rem;
-    height: 5vh;
     background: #F8F9FA;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -75,10 +80,41 @@
     text-align: center;
     color: #000000;
     border-radius: 12px;
-
+    min-height: 40px;
+    flex: 2;
 }
 .user-info p{
     margin: 0;
+}
+
+.profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4px;
+    align-items: center;
+    border-radius: 12px;
+    height: 40px;
+    width: 90px;
+    flex: 1;
+}
+.profile img{
+    width: 20px;
+}
+.profile p{
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.upper-hdr{
+    width: 90%;
+    max-width: 475px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    gap: 8px;
 }
 
 @media (min-width: 770px) {
@@ -91,52 +127,31 @@
         margin: 0 auto;
     }
 }
-@media (max-width: 575px) {
-    .time-holder{
-        width: 14vw;
-    }
-}
 
-
-
-@media (max-width: 410px) {
-    .time-holder{
-        width: 15vw;
-    }
-    .user-info{
-        width: 80%;
-    }
-}
-@media (max-width: 457px) {
-    .body-content{
-        margin: 0 4vw;
-    }
-}
-
-@media (max-width: 386px) {
+@media (max-width: 393px) {
     .inline-book{
-        font-size: 12px;
+        font-size: 11px;
     }
     .body-content{
         margin: 0 2vw;
     }
+    .profile p{
+        font-size: 15px;
+    }
 }
 @media(max-width:355px){
-    .time-holder{
-        width: 15vw;
-    }
     .today, .tomorrow, .after-tomorrow{
         font-size: 14px;
     }
     .inline-book{
         font-size: 11px;
     }
+    .profile p{
+        font-size: 13px;
+    }
 }
 
 @media (max-width: 318px) {
-    .time-holder{
-        width: 15vw;
-    }
     .today, .tomorrow, .after-tomorrow{
         font-size: 13px;
     }

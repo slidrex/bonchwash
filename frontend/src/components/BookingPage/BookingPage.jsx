@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BookingTable from '../BookingTable';
 import Modal from './Modal';
+import profileIcon from './profile_icon.svg';
 import './BookingPage.css';
 import {useLocation} from "react-router-dom";
 
@@ -70,26 +71,32 @@ function BookingPage() {
     return (
         <div className='container'>
             <div className="header">
-                <div className="user-info">
-                    <p>{userInfo.name}, к. {userInfo.room}</p>
+                <div className="upper-hdr">
+                    <div className="user-info">
+                        <p>{userInfo.name}, к. {userInfo.room}</p>
+                    </div>
+                    <div className="profile secondary">
+                        <img src={profileIcon} alt="Profile icon"/>
+                        <p>Профиль</p>
+                    </div>
                 </div>
                 <div className="book-buttons">
                     <div
-                        className={`time-holder btn ${activeButton === 'today' ? 'primary' : 'secondary'}`}
+                        className={`time-holder ${activeButton === 'today' ? 'primary' : 'secondary'}`}
                         onClick={() => setActiveButton('today')}
                     >
                         <div className="today">Сегодня</div>
                         <div className="inline-book">27 ноября</div>
                     </div>
                     <div
-                        className={`time-holder btn ${activeButton === 'tomorrow' ? 'primary' : 'secondary'}`}
+                        className={`time-holder ${activeButton === 'tomorrow' ? 'primary' : 'secondary'}`}
                         onClick={() => setActiveButton('tomorrow')}
                     >
                         <div className="tomorrow">Завтра</div>
                         <div className="inline-book">28 ноября</div>
                     </div>
                     <div
-                        className={`time-holder btn ${activeButton === 'after-tomorrow' ? 'primary' : 'secondary'}`}
+                        className={`time-holder ${activeButton === 'after-tomorrow' ? 'primary' : 'secondary'}`}
                         onClick={() => setActiveButton('after-tomorrow')}
                     >
                         <div className="after-tomorrow">Послезавтра</div>

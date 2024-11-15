@@ -35,6 +35,7 @@
     align-items: center;
     box-sizing: border-box;
     font-weight: bold;
+    min-height: 40px;
 }
 .confirmed {
     animation: fill-green 0.5s ease-in-out forwards;
@@ -71,9 +72,14 @@
     border: 1px solid var(--stroke-color)
 }
 @media (min-width: 500px) {
-
     .user-info{
         width: 30vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-time{
+        font-size: 14px;
     }
 }
 
