@@ -21,7 +21,7 @@ function VKIDButton() {
                     const oneTap = new VKID.OneTap();
 
                     oneTap.render({
-                        container: vkidContainerRef.current,
+                        container: document.getElementById('VkIdSdkOneTap'),
                         fastAuthEnabled: false,
                         showAlternativeLogin: true,
                         styles: {
