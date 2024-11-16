@@ -75,29 +75,15 @@ async def validate_vk_token(access_token: str, user_id: int):
             )
         return data["response"][0]["id"] == user_id
 
-@rt.get("/init-auth")
-async def init_auth():
-    # Генерация code_verifier и code_challenge
-    code_verifier = secrets.token_urlsafe(64)
-    sha256 = hashlib.sha256()
-    sha256.update(code_verifier.encode('utf-8'))
-    code_challenge = base64.urlsafe_b64encode(sha256.digest()).decode('utf-8').rstrip('=')
-
-    return VKInitResponse(code_challenge=code_challenge, code_verifier=code_verifier)
-
 @rt.post("/exchange-code")
 async def exchange_code(request: VKExchangeRequest):
     # URL для обмена кода на токены
-    url = "https://id.vk.com/oauth2/auth"
+    url = "https://api.vk.com/method/auth.exchangeSilentAuthToken"
 
     data = {
-        "grant_type": "authorization_code",
-        "code": request.code,
-        "redirect_uri": request.redirect_uri,
+        "v": "5.131",
+        "token": request.silent_token['token'],
         "client_id": request.client_id,
-        "code_verifier": request.state,  # Здесь передаём `code_verifier`
-        "device_id": request.device_id,
-        "state": request.state
     }
 
     # Отправка запроса
