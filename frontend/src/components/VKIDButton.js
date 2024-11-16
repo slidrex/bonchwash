@@ -37,7 +37,6 @@ function VKIDButton() {
                     })
                         .on(VKID.WidgetEvents.ERROR, vkidOnError)
                         .on(VKID.OneTapInternalEvents.LOGIN_SUCCESS, function (payload) {
-                            const { code, device_id: deviceId } = payload;
 
 
 
