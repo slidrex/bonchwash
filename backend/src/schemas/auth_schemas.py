@@ -9,7 +9,7 @@ class VKAuthResponse(BaseModel):
     authorized: bool
     message: str
 class VKExchangeRequest(BaseModel):
-    silent_token: str
+    silent_token: object
     redirect_uri: str
     client_id: int
 
