@@ -18,9 +18,8 @@ from typing import List
 from fastapi import HTTPException, Response, Cookie, Depends
 from datetime import datetime, timedelta, timezone
 import jwt
+from jwt.utils import get_int_from_datetime
 
-
-SEVEN_DAYS = 7 * 24 * 60 * 60  # 604800 seconds
 
 rt = APIRouter()
 
@@ -31,8 +30,8 @@ SECRET_KEY = "HALOBALOFAVOL@&!@$!^GDASDCVBNLMJRP_!"
 
 
 # Функция для создания JWT токена
-def create_jwt_token(room_id: str, expires_delta: timedelta):
-    expiration = datetime.now(timezone.utc) + expires_delta
+def create_jwt_token(room_id: str):
+    expiration = datetime.now(timezone.utc) + timedelta(days=10)
     payload = {
         "sub": room_id,
         "exp": expiration,
@@ -55,7 +54,7 @@ async def login(request: AuthRequest):
         raise HTTPException(status_code=404, detail="Room ID not found")
 
     # Генерация токена
-    token = create_jwt_token(request.room_id, SEVEN_DAYS)
+    token = create_jwt_token(request.room_id)
 
     return AuthResponse(access_token=token)
 
