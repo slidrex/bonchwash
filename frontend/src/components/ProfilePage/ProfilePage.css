@@ -1,0 +1,85 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.profile-header {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.profile-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid #E1E3E6;
+    background: #F8F9FA;
+    min-width: 200px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 19px;
+    text-align: center;
+    color: #000000;
+    border-radius: 12px;
+    min-height: 40px;
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.logout-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background: rgba(208, 44, 44, 0.15);
+    color: #FF5555;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.schedule {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.schedule h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.schedule p {
+    font-size: 1em;
+    margin: 5px 0;
+}
+
+.github-link {
+
+    font-size: 1em;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.github-link:hover {
+    text-decoration: underline;
+}
+
+.developers {
+    margin-bottom: 20px;
+    font-size: 1em;
+    color: #333;
+    text-align: center;
+
+}
+
+.developers p{
+    margin: 5px;
+}
