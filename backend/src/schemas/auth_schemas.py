@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class AuthRequest(BaseModel):
     room_id: str = Field(..., min_length=1, max_length=50)
