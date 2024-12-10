@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import BookingTable from '../BookingTable';
 import Modal from './Modal';
 import profileIcon from './profile_icon.svg';
 import './BookingPage.css';
-import {useLocation} from "react-router-dom";
 
 function BookingPage() {
+    const navigate = useNavigate();
     const location = useLocation();
-    const room = location.state?.room || '314'; // Default to '314' if no state is passed
+    const room = location.state?.room || '314';
     const [userInfo, setUserInfo] = useState({ name: 'Вячеслав Носов', room });
     const [activeButton, setActiveButton] = useState('today');
     const [occupiedSlots] = useState({
         "201": ["1-9", "3-11", "5-12"],
         "202": ["2-11", "4-13", "1-10"],
-        // ... other slots
     });
     const [confirmedSlots, setConfirmedSlots] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -66,6 +66,10 @@ function BookingPage() {
         setSelectedSlot(null);
     };
 
+    const handleProfileClick = () => {
+        navigate('/profile');
+    };
+
     const machineNumbers = [1, 2, 3, 4, 5, 6, 7];
 
     return (
@@ -75,7 +79,7 @@ function BookingPage() {
                     <div className="user-info">
                         <p>{userInfo.name}, к. {userInfo.room}</p>
                     </div>
-                    <div className="profile secondary">
+                    <div className="profile secondary" onClick={handleProfileClick}>
                         <img src={profileIcon} alt="Profile icon"/>
                         <p>Профиль</p>
                     </div>

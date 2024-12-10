@@ -97,6 +97,7 @@
     height: 40px;
     width: 90px;
     flex: 1;
+    cursor: pointer;
 }
 .profile img{
     width: 20px;
