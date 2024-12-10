@@ -18,7 +18,6 @@ from typing import List
 from fastapi import HTTPException, Response, Cookie, Depends
 from datetime import datetime, timedelta, timezone
 import jwt
-from jwt.utils import get_int_from_datetime
 
 
 rt = APIRouter()
