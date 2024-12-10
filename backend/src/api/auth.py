@@ -35,7 +35,7 @@ def create_jwt_token(room_id: str):
         "sub": room_id,
         "exp": expiration,
     }
-    token = jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
+    token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
     return token
 
 
