@@ -61,7 +61,7 @@ function ProfilePage() {
                 <p>Кандаров И.Е - Team Lead, Backend</p>
                 <p>Хоризонов Серафим - Frontend</p>
                 <p>Джон Доу - Design</p>
-                <a className="github-button" href="https://github.com/slidrex/bonchwash" target="_blank" >GitHub</a>
+                <a className="github-button" href="https://github.com/slidrex/bonchwash" target="_blank" rel="noreferrer">GitHub</a>
             </div>
         </div>
     );
