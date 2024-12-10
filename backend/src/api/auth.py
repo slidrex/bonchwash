@@ -16,7 +16,7 @@ import requests
 from typing import List
 
 from fastapi import HTTPException, Response, Cookie, Depends
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import jwt
 
 
