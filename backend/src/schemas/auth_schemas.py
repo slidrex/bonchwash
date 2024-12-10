@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 
 class AuthRequest(BaseModel):
-    access_token: str
-    refresh_token: str
-    vk_user_id: int
+    room_id: str = Field(..., min_length=1, max_length=50)
+
 
 class AuthResponse(BaseModel):
-    token: str
+    access_token: str
+    token_type: str = "bearer"
