@@ -1,4 +1,4 @@
-name: Deploy React App
+name: Deploy Next.js App
 
 on:
   push:
@@ -20,14 +20,14 @@ jobs:
         with:
           node-version: '18'
 
-      # Step 3: Navigate to the frontend directory and install dependencies
+      # Step 3: Navigate to the app directory and install dependencies
       - name: Install dependencies
         run: |
           cd frontend
           npm install
 
-      # Step 4: Build the React app
-      - name: Build React app
+      # Step 4: Build the Next.js app
+      - name: Build Next.js app
         run: |
           cd frontend
           npm run build
@@ -45,14 +45,11 @@ jobs:
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
 
           # Copy the built files to the remote server
-          scp -r ./frontend/build/* $SSH_USER@$SSH_HOST:/var/www/html/test-app/
+          rsync -avz --delete-after ./frontend/.next/ $SSH_USER@$SSH_HOST:/root/lyricscope
+          rsync -avz ./frontend/public/ $SSH_USER@$SSH_HOST:/root/lyricscope
 
-          # Restart Nginx (or other web server)
-          ssh $SSH_USER@$SSH_HOST "sudo systemctl restart nginx"
+          # Ensure package.json and .next files are copied
+          rsync -avz ./frontend/package.json $SSH_USER@$SSH_HOST:/root/lyricscope
 
-      # Step 6: Ensure the application is deployed correctly using rsync
-      - name: Final Deployment with rsync
-        run: |
-          rsync -avz --delete-after ./frontend/build/ root@94.250.255.111:/var/www/html/test-app/
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          # Restart the application (using PM2, Docker, or a custom process manager)
+          ssh $SSH_USER@$SSH_HOST "cd /root/lyricscope && npm install --production && pm2 restart app"
